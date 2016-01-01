@@ -1,0 +1,1 @@
+../../../MGWatchdog/MGWatchdog/MGWatchdog/Sources/MGWatchdogPlatformOSX.h

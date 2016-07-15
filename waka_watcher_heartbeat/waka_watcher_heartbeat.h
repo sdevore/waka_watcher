@@ -8,13 +8,14 @@
 
 #import "waka_watcher_heartbeatProtocol.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
+
 // Log levels: off, error, warn, info, verbose
 #import "XCDLumberjackNSLogger.h"
 #import <Foundation/Foundation.h>
 #ifdef DEBUG
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 #else
-static const DDLogLevel ddLogLevel = DDLogLevelWarn;
+static const DDLogLevel ddLogLevel = DDLogLevelWarning;
 #endif
 // This object implements the protocol which we have defined. It provides the
 // actual behavior for the service. It is 'exported' by the service to make it

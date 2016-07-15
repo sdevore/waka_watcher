@@ -1,13 +1,13 @@
 //
-//  ViewController.h
+//  FIleView.h
 //  waka_watcher
 //
-//  Created by Samuel DeVore on 1/1/16.
+//  Created by Samuel DeVore on 7/15/16.
 //  Copyright © 2016 Samuel DeVore. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
+@interface FIleView : NSTableCellView
 
 @end

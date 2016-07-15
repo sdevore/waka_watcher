@@ -7,9 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-@interface AppDelegate : NSObject <NSApplicationDelegate>
-
+#import <DevMateKit/DevMateKit.h>
+@interface AppDelegate
+    : NSObject <NSApplicationDelegate, DM_SUUpdaterDelegate_DevMateInteraction>
 
 @end
-

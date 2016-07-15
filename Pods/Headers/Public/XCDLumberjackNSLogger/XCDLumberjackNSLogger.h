@@ -1,1 +1,1 @@
-../../../XCDLumberjackNSLogger/XCDLumberjackNSLogger.h
+../../../XCDLumberjackNSLogger/XCDLumberjackNSLogger/XCDLumberjackNSLogger.h

@@ -685,6 +685,99 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2B68D5071D39A99A00E42A88 /* Travis */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Travis;
+		};
+		2B68D5081D39A99A00E42A88 /* Travis */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1CEF74A9A3D2E0116C7274B /* Pods-waka_watcher-waka_watcher.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = waka_watcher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcher";
+				PRODUCT_NAME = "Waka Watcher";
+			};
+			name = Travis;
+		};
+		2B68D5091D39A99A00E42A88 /* Travis */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCA35F7ED78DC4B227FF4D9C /* Pods-waka_watcher-waka_watcherTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = waka_watcherTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcherTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/waka_watcher.app/Contents/MacOS/waka_watcher";
+			};
+			name = Travis;
+		};
+		2B68D50A1D39A99A00E42A88 /* Travis */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CFC144E127502682DF1823A6 /* Pods-waka_watcher-waka_watcherUITests.release.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = waka_watcherUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcherUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = waka_watcher;
+				USES_XCTRUNNER = YES;
+			};
+			name = Travis;
+		};
+		2B68D50B1D39A99A00E42A88 /* Travis */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B507130C3C8BF0575CD0B24F /* Pods-waka_watcher-waka_watcher_heartbeat.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = waka_watcher_heartbeat/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcher-heartbeat";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Travis;
+		};
 		2B77BF4A1C36EE1A00A37049 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -886,6 +979,7 @@
 			buildConfigurations = (
 				2B77BF4A1C36EE1A00A37049 /* Debug */,
 				2B77BF4B1C36EE1A00A37049 /* Release */,
+				2B68D5071D39A99A00E42A88 /* Travis */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -895,6 +989,7 @@
 			buildConfigurations = (
 				2B77BF4D1C36EE1A00A37049 /* Debug */,
 				2B77BF4E1C36EE1A00A37049 /* Release */,
+				2B68D5081D39A99A00E42A88 /* Travis */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -904,6 +999,7 @@
 			buildConfigurations = (
 				2B77BF501C36EE1A00A37049 /* Debug */,
 				2B77BF511C36EE1A00A37049 /* Release */,
+				2B68D5091D39A99A00E42A88 /* Travis */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -913,6 +1009,7 @@
 			buildConfigurations = (
 				2B77BF531C36EE1A00A37049 /* Debug */,
 				2B77BF541C36EE1A00A37049 /* Release */,
+				2B68D50A1D39A99A00E42A88 /* Travis */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -922,6 +1019,7 @@
 			buildConfigurations = (
 				2B7DB5DB1D271EEA001B3917 /* Debug */,
 				2B7DB5DC1D271EEA001B3917 /* Release */,
+				2B68D50B1D39A99A00E42A88 /* Travis */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

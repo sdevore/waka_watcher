@@ -1,1 +1,0 @@
-../../../MGWatchdog/MGWatchdog/MGWatchdog/Sources/MGWatchdogPlatformIOS.h

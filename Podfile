@@ -4,7 +4,6 @@ abstract_target 'waka_watcher' do
     pod 'CocoaLumberjack'
     pod 'XCDLumberjackNSLogger'
     pod 'AFNetworkActivityLogger'
-    pod 'MGWatchdog'
 
     target :waka_watcher do
         pod 'NSColor-Pantone'

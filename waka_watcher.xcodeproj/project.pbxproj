@@ -754,7 +754,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcherTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/waka_watcher.app/Contents/MacOS/waka_watcher";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Waka Watcher.app/Contents/MacOS/Waka Watcher";
 			};
 			name = Travis;
 		};
@@ -904,7 +904,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcherTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/waka_watcher.app/Contents/MacOS/waka_watcher";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Waka Watcher.app/Contents/MacOS/Waka Watcher";
 			};
 			name = Debug;
 		};
@@ -918,7 +918,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcherTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/waka_watcher.app/Contents/MacOS/waka_watcher";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Waka Watcher.app/Contents/MacOS/Waka Watcher";
 			};
 			name = Release;
 		};

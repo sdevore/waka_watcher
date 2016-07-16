@@ -13,5 +13,6 @@ on_success: change # default: change
 on_failure: always # default: always
 
 before_install:
+- git submodule update --init --recursive
 - gem install cocoapods
 - pod repo update

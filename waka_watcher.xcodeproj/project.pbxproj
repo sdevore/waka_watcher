@@ -114,6 +114,9 @@
 		2B7DB5E01D271F3A001B3917 /* wakatime */ = {isa = PBXFileReference; lastKnownFileType = folder; name = wakatime; path = "wakatime-submodule/wakatime"; sourceTree = "<group>"; };
 		2BDBDC8F1D3958ED006D6B0E /* SCDFolderMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDFolderMonitor.h; sourceTree = "<group>"; };
 		2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDFolderMonitor.m; sourceTree = "<group>"; };
+		381C9F374D54BFB81FD9A79A /* Pods-waka_watcher-waka_watcher.travis.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher.travis.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher/Pods-waka_watcher-waka_watcher.travis.xcconfig"; sourceTree = "<group>"; };
+		4B13AE6656B0C46EA9526928 /* Pods-waka_watcher-waka_watcher_heartbeat.travis.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher_heartbeat.travis.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher_heartbeat/Pods-waka_watcher-waka_watcher_heartbeat.travis.xcconfig"; sourceTree = "<group>"; };
+		7268504FC2D04D0A0E9BA366 /* Pods-waka_watcher-waka_watcherUITests.travis.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcherUITests.travis.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcherUITests/Pods-waka_watcher-waka_watcherUITests.travis.xcconfig"; sourceTree = "<group>"; };
 		A00FC19BE212B3F2504D812E /* libPods-waka_watcher-waka_watcherTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-waka_watcher-waka_watcherTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B507130C3C8BF0575CD0B24F /* Pods-waka_watcher-waka_watcher_heartbeat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher_heartbeat.release.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher_heartbeat/Pods-waka_watcher-waka_watcher_heartbeat.release.xcconfig"; sourceTree = "<group>"; };
 		C1CEF74A9A3D2E0116C7274B /* Pods-waka_watcher-waka_watcher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher.release.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher/Pods-waka_watcher-waka_watcher.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 		D112A50AAB3F205A66339F6B /* Pods-waka_watcher-waka_watcher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher.debug.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher/Pods-waka_watcher-waka_watcher.debug.xcconfig"; sourceTree = "<group>"; };
 		D2A2B4251637263E7D0E6BE0 /* Pods-waka_watcher-waka_watcherTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcherTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcherTests/Pods-waka_watcher-waka_watcherTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E6E50E3E4B7E31CDF9D77EDE /* libPods-waka_watcher-waka_watcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-waka_watcher-waka_watcher.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EACEB7AD4306F2A325146EAA /* Pods-waka_watcher-waka_watcherTests.travis.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcherTests.travis.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcherTests/Pods-waka_watcher-waka_watcherTests.travis.xcconfig"; sourceTree = "<group>"; };
 		FCA35F7ED78DC4B227FF4D9C /* Pods-waka_watcher-waka_watcherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcherTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcherTests/Pods-waka_watcher-waka_watcherTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +176,10 @@
 				C1CEF74A9A3D2E0116C7274B /* Pods-waka_watcher-waka_watcher.release.xcconfig */,
 				01DDBD9B9228B2B9DD461996 /* Pods-waka_watcher-waka_watcher_heartbeat.debug.xcconfig */,
 				B507130C3C8BF0575CD0B24F /* Pods-waka_watcher-waka_watcher_heartbeat.release.xcconfig */,
+				381C9F374D54BFB81FD9A79A /* Pods-waka_watcher-waka_watcher.travis.xcconfig */,
+				EACEB7AD4306F2A325146EAA /* Pods-waka_watcher-waka_watcherTests.travis.xcconfig */,
+				7268504FC2D04D0A0E9BA366 /* Pods-waka_watcher-waka_watcherUITests.travis.xcconfig */,
+				4B13AE6656B0C46EA9526928 /* Pods-waka_watcher-waka_watcher_heartbeat.travis.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -709,6 +717,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -723,7 +732,7 @@
 		};
 		2B68D5081D39A99A00E42A88 /* Travis */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1CEF74A9A3D2E0116C7274B /* Pods-waka_watcher-waka_watcher.release.xcconfig */;
+			baseConfigurationReference = 381C9F374D54BFB81FD9A79A /* Pods-waka_watcher-waka_watcher.travis.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
@@ -737,7 +746,7 @@
 		};
 		2B68D5091D39A99A00E42A88 /* Travis */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FCA35F7ED78DC4B227FF4D9C /* Pods-waka_watcher-waka_watcherTests.release.xcconfig */;
+			baseConfigurationReference = EACEB7AD4306F2A325146EAA /* Pods-waka_watcher-waka_watcherTests.travis.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -751,7 +760,7 @@
 		};
 		2B68D50A1D39A99A00E42A88 /* Travis */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CFC144E127502682DF1823A6 /* Pods-waka_watcher-waka_watcherUITests.release.xcconfig */;
+			baseConfigurationReference = 7268504FC2D04D0A0E9BA366 /* Pods-waka_watcher-waka_watcherUITests.travis.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = waka_watcherUITests/Info.plist;
@@ -765,7 +774,7 @@
 		};
 		2B68D50B1D39A99A00E42A88 /* Travis */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B507130C3C8BF0575CD0B24F /* Pods-waka_watcher-waka_watcher_heartbeat.release.xcconfig */;
+			baseConfigurationReference = 4B13AE6656B0C46EA9526928 /* Pods-waka_watcher-waka_watcher_heartbeat.travis.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_IDENTITY = "";

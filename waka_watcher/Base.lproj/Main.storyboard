@@ -694,16 +694,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="757" height="233"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6HS-qA-M8C">
+                                            <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="6HS-qA-M8C">
                                                 <rect key="frame" x="4" y="1" width="65" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nqy-Mf-4a3">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                             </button>
-                                            <scrollView ambiguous="YES" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="34" horizontalPageScroll="10" verticalLineScroll="34" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fs-n2-3oD">
+                                            <scrollView autohidesScrollers="YES" horizontalLineScroll="34" horizontalPageScroll="10" verticalLineScroll="34" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fs-n2-3oD">
                                                 <rect key="frame" x="0.0" y="39" width="757" height="194"/>
-                                                <clipView key="contentView" ambiguous="YES" id="01Q-SV-2Du">
+                                                <clipView key="contentView" id="01Q-SV-2Du">
                                                     <rect key="frame" x="1" y="0.0" width="755" height="193"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
@@ -731,8 +731,8 @@
                                                                             <rect key="frame" x="1" y="1" width="637" height="32"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="grb-il-tyU">
-                                                                                    <rect key="frame" x="1" y="16" width="328" height="18"/>
+                                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="grb-il-tyU">
+                                                                                    <rect key="frame" x="1" y="1" width="635" height="18"/>
                                                                                     <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1Yc-el-ayk">
                                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                                         <font key="font" metaFont="system"/>
@@ -801,15 +801,15 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableHeaderView>
                                             </scrollView>
-                                            <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7o-Gb-wmO">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J7o-Gb-wmO">
                                                 <rect key="frame" x="69" y="1" width="89" height="34"/>
                                                 <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="15j-7B-rrR">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                             </button>
-                                            <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nOj-ff-ffo">
-                                                <rect key="frame" x="624" y="13" width="125" height="18"/>
+                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="nOj-ff-ffo">
+                                                <rect key="frame" x="624" y="6" width="125" height="25"/>
                                                 <buttonCell key="cell" type="check" title="Watch by default" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Gtn-vr-7aa">
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -821,6 +821,7 @@
                                             <constraint firstItem="6HS-qA-M8C" firstAttribute="baseline" secondItem="J7o-Gb-wmO" secondAttribute="baseline" id="L4D-fb-Hz4"/>
                                             <constraint firstItem="6HS-qA-M8C" firstAttribute="top" secondItem="3fs-n2-3oD" secondAttribute="bottom" constant="10" id="PZP-1K-mJs"/>
                                             <constraint firstAttribute="trailing" secondItem="nOj-ff-ffo" secondAttribute="trailing" constant="10" id="QaM-2k-U2q"/>
+                                            <constraint firstItem="nOj-ff-ffo" firstAttribute="centerY" secondItem="6HS-qA-M8C" secondAttribute="centerY" id="Rgz-2r-fco"/>
                                             <constraint firstItem="J7o-Gb-wmO" firstAttribute="leading" secondItem="6HS-qA-M8C" secondAttribute="trailing" constant="12" id="ZaG-I1-Bhx"/>
                                             <constraint firstItem="J7o-Gb-wmO" firstAttribute="top" secondItem="3fs-n2-3oD" secondAttribute="bottom" constant="8" id="ab0-Pz-erp"/>
                                             <constraint firstAttribute="bottom" secondItem="6HS-qA-M8C" secondAttribute="bottom" constant="8" id="nkM-mH-OOY"/>
@@ -958,32 +959,6 @@
                 <customObject id="tf9-04-loZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="170.5" y="821.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Us5-er-CAJ">
-            <objects>
-                <viewController id="Szi-hC-FhF" sceneMemberID="viewController">
-                    <view key="view" id="a22-Of-KDb">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="fQD-OY-j6i" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1457" y="939"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="iaA-yo-yCX">
-            <objects>
-                <viewController id="ZKS-7S-oFL" sceneMemberID="viewController">
-                    <view key="view" id="GrA-oy-mDu">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="eba-yJ-r4K" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1457" y="1300"/>
         </scene>
     </scenes>
 </document>

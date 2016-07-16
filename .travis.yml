@@ -11,7 +11,8 @@ recipients:
 - sdevore@sdevore.com
 on_success: change # default: change
 on_failure: always # default: always
-
+git:
+  submodules: false
 before_install:
 - git submodule update --init --recursive
 - gem install cocoapods

@@ -1,9 +1,7 @@
 platform :osx, '10.10'
 abstract_target 'waka_watcher' do
-    pod 'AFNetworking'
     pod 'CocoaLumberjack'
     pod 'XCDLumberjackNSLogger'
-    pod 'AFNetworkActivityLogger'
 
     target :waka_watcher do
         pod 'NSColor-Pantone'
@@ -12,6 +10,7 @@ abstract_target 'waka_watcher' do
         pod 'LetsMove'
         pod 'MTEThreadsafeCollections', :git => 'https://github.com/sdevore/MTEThreadsafeCollections.git'
         pod 'DevMateKit'
+        pod 'CDEvents'
     end
     
     target :waka_watcher_heartbeat do

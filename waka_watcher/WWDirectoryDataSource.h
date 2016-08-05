@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class MTEThreadsafeArray;
 
-@interface WWDirectoryDataSource : NSObject <NSTableViewDataSource, NSTableViewDelegate>
+@interface WWDirectoryDataSource : NSObject <NSOutlineViewDataSource>
+@property (nullable) MTEThreadsafeArray *children;
 
-
-
+- (nullable NSIndexSet *)addURLs:(nullable NSArray *)URLs withDelegate:(nullable id)delegate;
 @end

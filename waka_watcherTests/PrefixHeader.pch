@@ -1,0 +1,20 @@
+//
+//  PrefixHeader.pch
+//  waka_watcher
+//
+//  Created by Samuel DeVore on 8/4/16.
+//  Copyright © 2016 Samuel DeVore. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#import <CocoaLumberjack/CocoaLumberjack.h>
+#import "XCDLumberjackNSLogger.h"
+
+#ifdef DEBUG
+static  DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#else
+static  DDLogLevel ddLogLevel = DDLogLevelWarn;
+#endif
+
+#endif /* PrefixHeader_pch */

@@ -8,6 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
+@class WWDirectoryDataSource;
+@class WWDirectoryItemProtocol;
+
+@interface ViewController : NSViewController <NSOutlineViewDelegate, WWDirectoryItemProtocol>
+@property (nullable, weak) IBOutlet NSButton *watchingButton;
+@property (nullable, weak) IBOutlet NSTableView *recentChangesView;
+@property (nullable, weak) IBOutlet NSOutlineView *directoryView;
+@property (nullable) WWDirectoryDataSource *outlineDatasource;
+- (IBAction)addDirectory:(nullable id)sender;
+- (IBAction)removeSelectedDirectory:(nullable id)sender;
+- (IBAction)watching:(nullable id)sender;
+- (IBAction)watchingDefault:(nullable id)sender;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ModifiedView.h"
+NSString * const kFileModifiedColumn = @"fileModifiedColumn";
 
 @implementation ModifiedView
 

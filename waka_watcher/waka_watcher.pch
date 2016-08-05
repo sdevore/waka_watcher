@@ -1,0 +1,22 @@
+//
+//  waka_watcher.pch
+//  waka_watcher
+//
+//  Created by Samuel DeVore on 7/20/16.
+//  Copyright © 2016 Samuel DeVore. All rights reserved.
+//
+
+#ifndef waka_watcher_pch
+#define waka_watcher_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <CocoaLumberjack/CocoaLumberjack.h>
+#import "XCDLumberjackNSLogger.h"
+
+#ifdef DEBUG
+static  DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#else
+static  DDLogLevel ddLogLevel = DDLogLevelWarn;
+#endif
+#endif /* waka_watcher_pch */

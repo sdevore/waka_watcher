@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		01C283F63E2D5CF81DA9713D /* libPods-waka_watcher-waka_watcherTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A00FC19BE212B3F2504D812E /* libPods-waka_watcher-waka_watcherTests.a */; };
-		2B06698A1D3963A700CDD56A /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2B0669891D3963A700CDD56A /* .travis.yml */; };
 		2B06698D1D39755400CDD56A /* WWDirectoryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B06698C1D39755400CDD56A /* WWDirectoryDataSource.m */; };
-		2B2C304D1D399313009DBD6A /* FIleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2C304C1D399313009DBD6A /* FIleView.m */; };
+		2B2C304D1D399313009DBD6A /* FileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2C304C1D399313009DBD6A /* FileView.m */; };
 		2B2C30501D399328009DBD6A /* ModifiedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2C304F1D399328009DBD6A /* ModifiedView.m */; };
+		2B38EB521D3EED7500D7C039 /* WWDirectoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B38EB511D3EED7500D7C039 /* WWDirectoryItem.m */; };
 		2B77BF271C36EE1A00A37049 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B77BF261C36EE1A00A37049 /* AppDelegate.m */; };
 		2B77BF2A1C36EE1A00A37049 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B77BF291C36EE1A00A37049 /* main.m */; };
 		2B77BF2D1C36EE1A00A37049 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B77BF2C1C36EE1A00A37049 /* ViewController.m */; };
@@ -24,6 +24,14 @@
 		2B7DB5DA1D271EEA001B3917 /* waka_watcher_heartbeat.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 2B7DB5CF1D271EEA001B3917 /* waka_watcher_heartbeat.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2B7DB5E11D271F3A001B3917 /* wakatime in Resources */ = {isa = PBXBuildFile; fileRef = 2B7DB5E01D271F3A001B3917 /* wakatime */; };
 		2B7DB5E21D271F48001B3917 /* wakatime in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2B7DB5E01D271F3A001B3917 /* wakatime */; };
+		2B83CB7A1D3FD79000EA4960 /* WWDirectoryDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CB791D3FD79000EA4960 /* WWDirectoryDataSourceTests.m */; };
+		2B83CB7C1D3FDDDC00EA4960 /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CB7B1D3FDDDC00EA4960 /* UserDefaults.plist */; };
+		2BA4E6861D513F8B00359024 /* WWDirectoryItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4E6851D513F8B00359024 /* WWDirectoryItemTests.m */; };
+		2BBA7B2D1D40014E00FFF9B3 /* WWDirectoryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B06698C1D39755400CDD56A /* WWDirectoryDataSource.m */; };
+		2BBA7B2E1D40015300FFF9B3 /* WWDirectoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B38EB511D3EED7500D7C039 /* WWDirectoryItem.m */; };
+		2BBA7C261D40160C00FFF9B3 /* SCDTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA7C251D40160C00FFF9B3 /* SCDTestCase.m */; };
+		2BBA7C291D40168E00FFF9B3 /* one_file.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA7C281D40168E00FFF9B3 /* one_file.txt */; };
+		2BBA7C2C1D4016BD00FFF9B3 /* two_file.text in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA7C2A1D40169B00FFF9B3 /* two_file.text */; };
 		2BDBDC911D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
 		2BDBDC921D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
 		3653C272208D61BCDA4D2658 /* libPods-waka_watcher-waka_watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E50E3E4B7E31CDF9D77EDE /* libPods-waka_watcher-waka_watcher.a */; };
@@ -86,10 +94,17 @@
 		2B0669891D3963A700CDD56A /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		2B06698B1D39755400CDD56A /* WWDirectoryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWDirectoryDataSource.h; sourceTree = "<group>"; };
 		2B06698C1D39755400CDD56A /* WWDirectoryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWDirectoryDataSource.m; sourceTree = "<group>"; };
-		2B2C304B1D399313009DBD6A /* FIleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIleView.h; sourceTree = "<group>"; };
-		2B2C304C1D399313009DBD6A /* FIleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIleView.m; sourceTree = "<group>"; };
+		2B06F6481D5145F4005979D7 /* .clang-format */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".clang-format"; sourceTree = "<group>"; };
+		2B06F6491D5145FC005979D7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		2B06F64A1D514607005979D7 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
+		2B06F64B1D51460F005979D7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		2B2142E51D53B37C0006615D /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		2B2C304B1D399313009DBD6A /* FileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileView.h; sourceTree = "<group>"; };
+		2B2C304C1D399313009DBD6A /* FileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileView.m; sourceTree = "<group>"; };
 		2B2C304E1D399328009DBD6A /* ModifiedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifiedView.h; sourceTree = "<group>"; };
 		2B2C304F1D399328009DBD6A /* ModifiedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifiedView.m; sourceTree = "<group>"; };
+		2B38EB501D3EED7500D7C039 /* WWDirectoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWDirectoryItem.h; sourceTree = "<group>"; };
+		2B38EB511D3EED7500D7C039 /* WWDirectoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWDirectoryItem.m; sourceTree = "<group>"; };
 		2B77BF221C36EE1A00A37049 /* Waka Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Waka Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B77BF251C36EE1A00A37049 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2B77BF261C36EE1A00A37049 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -112,6 +127,14 @@
 		2B7DB5D51D271EEA001B3917 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2B7DB5D71D271EEA001B3917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B7DB5E01D271F3A001B3917 /* wakatime */ = {isa = PBXFileReference; lastKnownFileType = folder; name = wakatime; path = "wakatime-submodule/wakatime"; sourceTree = "<group>"; };
+		2B83CB781D3FD19500EA4960 /* waka_watcher.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = waka_watcher.pch; sourceTree = "<group>"; };
+		2B83CB791D3FD79000EA4960 /* WWDirectoryDataSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWDirectoryDataSourceTests.m; sourceTree = "<group>"; };
+		2B83CB7B1D3FDDDC00EA4960 /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
+		2BA4E6851D513F8B00359024 /* WWDirectoryItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWDirectoryItemTests.m; sourceTree = "<group>"; };
+		2BBA7C241D40160C00FFF9B3 /* SCDTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDTestCase.h; sourceTree = "<group>"; };
+		2BBA7C251D40160C00FFF9B3 /* SCDTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDTestCase.m; sourceTree = "<group>"; };
+		2BBA7C281D40168E00FFF9B3 /* one_file.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = one_file.txt; sourceTree = "<group>"; };
+		2BBA7C2A1D40169B00FFF9B3 /* two_file.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = two_file.text; sourceTree = "<group>"; };
 		2BDBDC8F1D3958ED006D6B0E /* SCDFolderMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDFolderMonitor.h; sourceTree = "<group>"; };
 		2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDFolderMonitor.m; sourceTree = "<group>"; };
 		381C9F374D54BFB81FD9A79A /* Pods-waka_watcher-waka_watcher.travis.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher.travis.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher/Pods-waka_watcher-waka_watcher.travis.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +210,10 @@
 		2B0669881D39638900CDD56A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				2B06F64B1D51460F005979D7 /* Podfile */,
+				2B06F64A1D514607005979D7 /* .gitmodules */,
+				2B06F6491D5145FC005979D7 /* .gitignore */,
+				2B06F6481D5145F4005979D7 /* .clang-format */,
 				2B0669891D3963A700CDD56A /* .travis.yml */,
 			);
 			name = Settings;
@@ -197,8 +224,8 @@
 			children = (
 				2B77BF2B1C36EE1A00A37049 /* ViewController.h */,
 				2B77BF2C1C36EE1A00A37049 /* ViewController.m */,
-				2B2C304B1D399313009DBD6A /* FIleView.h */,
-				2B2C304C1D399313009DBD6A /* FIleView.m */,
+				2B2C304B1D399313009DBD6A /* FileView.h */,
+				2B2C304C1D399313009DBD6A /* FileView.m */,
 				2B2C304E1D399328009DBD6A /* ModifiedView.h */,
 				2B2C304F1D399328009DBD6A /* ModifiedView.m */,
 			);
@@ -245,6 +272,8 @@
 				2B77BF281C36EE1A00A37049 /* Supporting Files */,
 				2B06698B1D39755400CDD56A /* WWDirectoryDataSource.h */,
 				2B06698C1D39755400CDD56A /* WWDirectoryDataSource.m */,
+				2B38EB501D3EED7500D7C039 /* WWDirectoryItem.h */,
+				2B38EB511D3EED7500D7C039 /* WWDirectoryItem.m */,
 			);
 			path = waka_watcher;
 			sourceTree = "<group>";
@@ -253,6 +282,8 @@
 			isa = PBXGroup;
 			children = (
 				2B77BF291C36EE1A00A37049 /* main.m */,
+				2B83CB781D3FD19500EA4960 /* waka_watcher.pch */,
+				2B83CB7B1D3FDDDC00EA4960 /* UserDefaults.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -260,8 +291,14 @@
 		2B77BF3B1C36EE1A00A37049 /* waka_watcherTests */ = {
 			isa = PBXGroup;
 			children = (
+				2BBA7C271D40166900FFF9B3 /* TestResources */,
+				2BBA7C241D40160C00FFF9B3 /* SCDTestCase.h */,
+				2BBA7C251D40160C00FFF9B3 /* SCDTestCase.m */,
 				2B77BF3C1C36EE1A00A37049 /* waka_watcherTests.m */,
 				2B77BF3E1C36EE1A00A37049 /* Info.plist */,
+				2B83CB791D3FD79000EA4960 /* WWDirectoryDataSourceTests.m */,
+				2BA4E6851D513F8B00359024 /* WWDirectoryItemTests.m */,
+				2B2142E51D53B37C0006615D /* PrefixHeader.pch */,
 			);
 			path = waka_watcherTests;
 			sourceTree = "<group>";
@@ -285,6 +322,15 @@
 				2B7DB5D71D271EEA001B3917 /* Info.plist */,
 			);
 			path = waka_watcher_heartbeat;
+			sourceTree = "<group>";
+		};
+		2BBA7C271D40166900FFF9B3 /* TestResources */ = {
+			isa = PBXGroup;
+			children = (
+				2BBA7C281D40168E00FFF9B3 /* one_file.txt */,
+				2BBA7C2A1D40169B00FFF9B3 /* two_file.text */,
+			);
+			name = TestResources;
 			sourceTree = "<group>";
 		};
 		7EB7390FAF58E3BF7D09715F /* Frameworks */ = {
@@ -399,6 +445,7 @@
 					};
 					2B77BF371C36EE1A00A37049 = {
 						CreatedOnToolsVersion = 7.2;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 2B77BF211C36EE1A00A37049;
 					};
 					2B77BF421C36EE1A00A37049 = {
@@ -437,9 +484,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B06698A1D3963A700CDD56A /* .travis.yml in Resources */,
 				2B77BF2F1C36EE1A00A37049 /* Assets.xcassets in Resources */,
 				2B77BF321C36EE1A00A37049 /* Main.storyboard in Resources */,
+				2B83CB7C1D3FDDDC00EA4960 /* UserDefaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +494,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BBA7C291D40168E00FFF9B3 /* one_file.txt in Resources */,
+				2BBA7C2C1D4016BD00FFF9B3 /* two_file.text in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,9 +677,10 @@
 				2B06698D1D39755400CDD56A /* WWDirectoryDataSource.m in Sources */,
 				2B2C30501D399328009DBD6A /* ModifiedView.m in Sources */,
 				2B77BF2D1C36EE1A00A37049 /* ViewController.m in Sources */,
-				2B2C304D1D399313009DBD6A /* FIleView.m in Sources */,
+				2B2C304D1D399313009DBD6A /* FileView.m in Sources */,
 				2B77BF2A1C36EE1A00A37049 /* main.m in Sources */,
 				2B77BF271C36EE1A00A37049 /* AppDelegate.m in Sources */,
+				2B38EB521D3EED7500D7C039 /* WWDirectoryItem.m in Sources */,
 				2BDBDC911D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -639,6 +689,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BBA7C261D40160C00FFF9B3 /* SCDTestCase.m in Sources */,
+				2B83CB7A1D3FD79000EA4960 /* WWDirectoryDataSourceTests.m in Sources */,
+				2BA4E6861D513F8B00359024 /* WWDirectoryItemTests.m in Sources */,
+				2BBA7B2D1D40014E00FFF9B3 /* WWDirectoryDataSource.m in Sources */,
+				2BBA7B2E1D40015300FFF9B3 /* WWDirectoryItem.m in Sources */,
 				2B77BF3D1C36EE1A00A37049 /* waka_watcherTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,6 +792,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = waka_watcher/waka_watcher.pch;
 				INFOPLIST_FILE = waka_watcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcher";
@@ -749,7 +806,11 @@
 			baseConfigurationReference = EACEB7AD4306F2A325146EAA /* Pods-waka_watcher-waka_watcherTests.travis.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = waka_watcherTests/PrefixHeader.pch;
 				INFOPLIST_FILE = waka_watcherTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcherTests";
@@ -873,10 +934,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = waka_watcher/waka_watcher.pch;
 				INFOPLIST_FILE = waka_watcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcher";
 				PRODUCT_NAME = "Waka Watcher";
+				PROVISIONING_PROFILE_SPECIFIER = CV9TRZ7X9F/;
 			};
 			name = Debug;
 		};
@@ -887,6 +951,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = waka_watcher/waka_watcher.pch;
 				INFOPLIST_FILE = waka_watcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcher";
@@ -899,7 +965,10 @@
 			baseConfigurationReference = D2A2B4251637263E7D0E6BE0 /* Pods-waka_watcher-waka_watcherTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = waka_watcherTests/PrefixHeader.pch;
 				INFOPLIST_FILE = waka_watcherTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcherTests";
@@ -913,7 +982,10 @@
 			baseConfigurationReference = FCA35F7ED78DC4B227FF4D9C /* Pods-waka_watcher-waka_watcherTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = waka_watcherTests/PrefixHeader.pch;
 				INFOPLIST_FILE = waka_watcherTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcherTests";
@@ -961,6 +1033,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scidsolutions.waka-watcher-heartbeat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = CV9TRZ7X9F/;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;

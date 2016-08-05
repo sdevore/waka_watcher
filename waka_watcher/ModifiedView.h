@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+extern NSString * __nonnull const kFileModifiedColumn;
 
 @interface ModifiedView : NSTableCellView
 

@@ -5,17 +5,24 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "44B14DDAB292097E4FD8C71928847EF8440ACA44" : 0,
+    "1E681D9D2CBF4CDDDEB3785DEEB0F846E123D878" : 0,
     "66C8087AFFD6CA5ECCA3E46A45E32157D8F40E65" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "93502E91-D8B5-458B-9AFB-7B9F788AA007",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "44B14DDAB292097E4FD8C71928847EF8440ACA44" : "waka_watcher\/",
+    "1E681D9D2CBF4CDDDEB3785DEEB0F846E123D878" : "SCDUtils\/",
     "66C8087AFFD6CA5ECCA3E46A45E32157D8F40E65" : "waka_watcher\/wakatime-submodule\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "waka_watcher",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "waka_watcher.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:sdevore\/SCDUtils.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1E681D9D2CBF4CDDDEB3785DEEB0F846E123D878"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/sdevore\/waka_watcher.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",

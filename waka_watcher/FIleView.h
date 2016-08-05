@@ -7,7 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "WWDirectoryItem.h"
 
-@interface FIleView : NSTableCellView
+extern NSString * __nonnull const kFileViewColumn;
 
+@interface FileView : NSTableCellView
+
+@property (nullable, nonatomic) WWDirectoryItem *fileItem;
+
+@property (weak, nullable) IBOutlet NSImageView *iconView;
+@property (weak, nullable) IBOutlet NSButton *watchForChanges;
+@property (weak, nullable) IBOutlet NSTextField *directoryItemLabel;
+
+
+
+- (IBAction)watchForChanges:(nullable id)sender;
 @end

@@ -19,6 +19,7 @@ abstract_target 'waka_watcher' do
     
     target :waka_watcherTests do
         pod 'OHHTTPStubs'
+       
     end
     target :waka_watcherUITests do
         pod 'OHHTTPStubs'

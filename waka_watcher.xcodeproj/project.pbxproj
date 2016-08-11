@@ -32,6 +32,8 @@
 		2BBA7C261D40160C00FFF9B3 /* SCDTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA7C251D40160C00FFF9B3 /* SCDTestCase.m */; };
 		2BBA7C291D40168E00FFF9B3 /* one_file.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA7C281D40168E00FFF9B3 /* one_file.txt */; };
 		2BBA7C2C1D4016BD00FFF9B3 /* two_file.text in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA7C2A1D40169B00FFF9B3 /* two_file.text */; };
+		2BC561AD1D5B9C2B00B3A006 /* .wakatime-project in Resources */ = {isa = PBXBuildFile; fileRef = 2BC561AC1D5B9C2B00B3A006 /* .wakatime-project */; };
+		2BC561B01D5BE37500B3A006 /* ProjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC561AF1D5BE37500B3A006 /* ProjectView.m */; };
 		2BDBDC911D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
 		2BDBDC921D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
 		3653C272208D61BCDA4D2658 /* libPods-waka_watcher-waka_watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E50E3E4B7E31CDF9D77EDE /* libPods-waka_watcher-waka_watcher.a */; };
@@ -97,7 +99,7 @@
 		2B06F6481D5145F4005979D7 /* .clang-format */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".clang-format"; sourceTree = "<group>"; };
 		2B06F6491D5145FC005979D7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2B06F64A1D514607005979D7 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
-		2B06F64B1D51460F005979D7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		2B06F64B1D51460F005979D7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2B2142E51D53B37C0006615D /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		2B2C304B1D399313009DBD6A /* FileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileView.h; sourceTree = "<group>"; };
 		2B2C304C1D399313009DBD6A /* FileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileView.m; sourceTree = "<group>"; };
@@ -135,6 +137,9 @@
 		2BBA7C251D40160C00FFF9B3 /* SCDTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDTestCase.m; sourceTree = "<group>"; };
 		2BBA7C281D40168E00FFF9B3 /* one_file.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = one_file.txt; sourceTree = "<group>"; };
 		2BBA7C2A1D40169B00FFF9B3 /* two_file.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = two_file.text; sourceTree = "<group>"; };
+		2BC561AC1D5B9C2B00B3A006 /* .wakatime-project */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".wakatime-project"; sourceTree = "<group>"; };
+		2BC561AE1D5BE37500B3A006 /* ProjectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectView.h; sourceTree = "<group>"; };
+		2BC561AF1D5BE37500B3A006 /* ProjectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectView.m; sourceTree = "<group>"; };
 		2BDBDC8F1D3958ED006D6B0E /* SCDFolderMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDFolderMonitor.h; sourceTree = "<group>"; };
 		2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDFolderMonitor.m; sourceTree = "<group>"; };
 		381C9F374D54BFB81FD9A79A /* Pods-waka_watcher-waka_watcher.travis.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher.travis.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher/Pods-waka_watcher-waka_watcher.travis.xcconfig"; sourceTree = "<group>"; };
@@ -210,6 +215,7 @@
 		2B0669881D39638900CDD56A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				2BC561AC1D5B9C2B00B3A006 /* .wakatime-project */,
 				2B06F64B1D51460F005979D7 /* Podfile */,
 				2B06F64A1D514607005979D7 /* .gitmodules */,
 				2B06F6491D5145FC005979D7 /* .gitignore */,
@@ -228,6 +234,8 @@
 				2B2C304C1D399313009DBD6A /* FileView.m */,
 				2B2C304E1D399328009DBD6A /* ModifiedView.h */,
 				2B2C304F1D399328009DBD6A /* ModifiedView.m */,
+				2BC561AE1D5BE37500B3A006 /* ProjectView.h */,
+				2BC561AF1D5BE37500B3A006 /* ProjectView.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -486,6 +494,7 @@
 			files = (
 				2B77BF2F1C36EE1A00A37049 /* Assets.xcassets in Resources */,
 				2B77BF321C36EE1A00A37049 /* Main.storyboard in Resources */,
+				2BC561AD1D5B9C2B00B3A006 /* .wakatime-project in Resources */,
 				2B83CB7C1D3FDDDC00EA4960 /* UserDefaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -679,6 +688,7 @@
 				2B77BF2D1C36EE1A00A37049 /* ViewController.m in Sources */,
 				2B2C304D1D399313009DBD6A /* FileView.m in Sources */,
 				2B77BF2A1C36EE1A00A37049 /* main.m in Sources */,
+				2BC561B01D5BE37500B3A006 /* ProjectView.m in Sources */,
 				2B77BF271C36EE1A00A37049 /* AppDelegate.m in Sources */,
 				2B38EB521D3EED7500D7C039 /* WWDirectoryItem.m in Sources */,
 				2BDBDC911D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */,

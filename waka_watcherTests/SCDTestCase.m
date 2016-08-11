@@ -97,7 +97,7 @@
     NSURL *location = [[NSURL fileURLWithPath:NSTemporaryDirectory()]
         URLByAppendingPathComponent:[[NSProcessInfo processInfo]
                                         globallyUniqueString]];
-
+location = [location URLByResolvingSymlinksInPath];
     if ([[NSFileManager defaultManager] createDirectoryAtURL:location
                                  withIntermediateDirectories:YES
                                                   attributes:nil
@@ -130,6 +130,19 @@
 
   return [[NSBundle bundleForClass:self.class] URLForResource:@"Resources"
                                                 withExtension:nil];
+}
+
+- (BOOL)expected:(NSURL *)expected isEqualToActual:(NSURL *)actual
+{
+    id fileURLIDExpected;
+    [expected getResourceValue:&fileURLIDExpected forKey:NSURLFileResourceIdentifierKey error:NULL];
+    
+    id fileURLIDActual;
+    [actual getResourceValue:&fileURLIDActual forKey:NSURLFileResourceIdentifierKey error:NULL];
+    
+    if (!fileURLIDActual || !fileURLIDExpected) return NO; // no file URLs?
+    
+    return ([fileURLIDExpected isEqual:fileURLIDActual]);
 }
 
 @end

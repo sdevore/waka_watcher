@@ -9,6 +9,8 @@
 #import "FileView.h"
 NSString *const kFileViewColumn = @"fileViewColumn";
 
+
+
 @implementation FileView
 
 - (void)drawRect:(NSRect)dirtyRect {

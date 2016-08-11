@@ -6,7 +6,7 @@ abstract_target 'waka_watcher' do
     target :waka_watcher do
         pod 'NSColor-Pantone'
         pod 'NSColor-Crayola'
-        pod 'SSKeychain'
+        pod 'SAMKeychain'
         pod 'LetsMove'
         pod 'MTEThreadsafeCollections', :git => 'https://github.com/sdevore/MTEThreadsafeCollections.git'
         pod 'DevMateKit'
@@ -19,9 +19,12 @@ abstract_target 'waka_watcher' do
     
     target :waka_watcherTests do
         pod 'OHHTTPStubs'
-       
+        pod 'OCMock'
+       pod 'OCHamcrest', '~> 6.0'
     end
     target :waka_watcherUITests do
         pod 'OHHTTPStubs'
+        pod 'OCMock'
+        pod 'OCHamcrest', '~> 6.0'
     end
 end

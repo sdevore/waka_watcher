@@ -18,4 +18,5 @@
 - (NSURL *)createDirectory:(NSString *)name;
 - (NSURL *)createDirectory:(NSString *)name insideDirectory:(NSURL *)directory;
 
+- (BOOL)expected:(NSURL *)expected isEqualToActual:(NSURL *)actual;
 @end

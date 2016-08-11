@@ -33,11 +33,47 @@
 - (NSIndexSet *)addURLs:(NSArray *)URLs withDelegate:(id)delegate {
     NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
     for (NSURL *url in URLs) {
+        NSError *error;
         WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:url];
+        if (item.isDirectory) {
+            NSURL *wakatimeProject;
+            wakatimeProject = [item.url URLByAppendingPathComponent:@".wakatime-project"];
+            if ([wakatimeProject checkResourceIsReachableAndReturnError:&error] == NO) {
+                // no default project defining file
+            } else {
+                NSError *error = nil;
+                NSStringEncoding encoding;
+                NSString *wakatimeProjectContents =
+                    [NSString stringWithContentsOfURL:wakatimeProject
+                                         usedEncoding:&encoding
+                                                error:&error];
+                if (nil != wakatimeProjectContents) {
+                    wakatimeProjectContents = [wakatimeProjectContents
+                        stringByTrimmingCharactersInSet:[NSCharacterSet
+                                                            whitespaceAndNewlineCharacterSet]];
+                    [item setProject:wakatimeProjectContents];
+                }
+            }
+        }
         item.delegate = delegate;
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(queue, ^{
-            [item loadChildren];
+            BOOL shouldLoad = false;
+            if (nil != self.delegate && [self.delegate respondsToSelector:@selector(directoryDataSource:shouldLoadItem:)]) {
+                if (![self.delegate directoryDataSource:self shouldLoadItem:item]) {
+                    return;
+                }
+            }
+            if (nil != self.delegate &&
+                [self.delegate respondsToSelector:@selector(directoryDataSource:willLoadItem:)]) {
+                shouldLoad = [self.delegate directoryDataSource:self willLoadItem:item];
+            }
+            if (shouldLoad) {
+                [item loadChildren];
+                if (nil != self.delegate && [self.delegate respondsToSelector:@selector(directoryDataSource:didLoadItem:)]){
+                    [self.delegate directoryDataSource:self didLoadItem:item];
+                }
+            }
         });
         [self.children addObject:item];
         NSArray *children = [self.children array];

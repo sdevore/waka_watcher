@@ -32,7 +32,6 @@
 		2BBA7C261D40160C00FFF9B3 /* SCDTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA7C251D40160C00FFF9B3 /* SCDTestCase.m */; };
 		2BBA7C291D40168E00FFF9B3 /* one_file.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA7C281D40168E00FFF9B3 /* one_file.txt */; };
 		2BBA7C2C1D4016BD00FFF9B3 /* two_file.text in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA7C2A1D40169B00FFF9B3 /* two_file.text */; };
-		2BC561AD1D5B9C2B00B3A006 /* .wakatime-project in Resources */ = {isa = PBXBuildFile; fileRef = 2BC561AC1D5B9C2B00B3A006 /* .wakatime-project */; };
 		2BC561B01D5BE37500B3A006 /* ProjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC561AF1D5BE37500B3A006 /* ProjectView.m */; };
 		2BDBDC911D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
 		2BDBDC921D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
@@ -494,7 +493,6 @@
 			files = (
 				2B77BF2F1C36EE1A00A37049 /* Assets.xcassets in Resources */,
 				2B77BF321C36EE1A00A37049 /* Main.storyboard in Resources */,
-				2BC561AD1D5B9C2B00B3A006 /* .wakatime-project in Resources */,
 				2B83CB7C1D3FDDDC00EA4960 /* UserDefaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

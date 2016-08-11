@@ -269,6 +269,21 @@
     XCTAssertTrue([self expected:newURL isEqualToActual:modifiedItem.url], @"url should match");
 }
 
+- (void)testUpdate_noChanges {
+    [_testItem loadChildren];
+    
+}
+
+- (void)testUpdate_addFile {
+}
+- (void)testUpdate_deleteFile {
+}
+
+- (void)testUpdate_deepAddFile {
+}
+
+#pragma mark - performance section
+
 - (void)testDirectoryChangesPerfomance {
     [_testItem loadChildren];
     XCTAssertNotNil(_testItem, @"should not be nil");
@@ -279,17 +294,6 @@
         XCTAssertNotNil(changes, @"changes should not be nil");
         XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
     }];
-}
-
-- (void)testUpdate_noChanges {
-}
-
-- (void)testUpdate_addFile {
-}
-- (void)testUpdate_deleteFile {
-}
-
-- (void)testUpdate_deepAddFile {
 }
 - (void)testLoadingPerfomance {
     [self measureBlock:^{

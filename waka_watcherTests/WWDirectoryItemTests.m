@@ -97,10 +97,9 @@
 }
 
 - (void)testDirectoryChangesNone {
-    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
-    [item loadChildren];
-    XCTAssertNotNil(item, @"should not be nil");
-    NSDictionary *changes = [item directoryChanges:NO];
+    [_testItem loadChildren];
+    XCTAssertNotNil(_testItem, @"should not be nil");
+    NSDictionary *changes = [_testItem directoryChanges:NO];
     XCTAssertNotNil(changes, @"changes should not be nil");
     XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
     XCTAssertNotNil([changes objectForKey:kAddDictionaryKey], @"add object should exist");
@@ -115,11 +114,10 @@
 }
 
 - (void)testDirectoryChangesAddFile {
-    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
-    [item loadChildren];
-    XCTAssertNotNil(item, @"should not be nil");
+    [_testItem loadChildren];
+    XCTAssertNotNil(_testItem, @"should not be nil");
     NSURL *newURL = [self createFile:@"new.txt" withContent:nil insideDirectory:_testFolder];
-    NSDictionary *changes = [item directoryChanges:NO];
+    NSDictionary *changes = [_testItem directoryChanges:NO];
     XCTAssertNotNil(changes, @"changes should not be nil");
     XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
     NSArray *add = [changes objectForKey:kAddDictionaryKey];
@@ -194,11 +192,10 @@
 }
 
 - (void)testDirectoryChangesDeepAddFile {
-    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
-    [item loadChildren];
-    XCTAssertNotNil(item, @"should not be nil");
+    [_testItem loadChildren];
+    XCTAssertNotNil(_testItem, @"should not be nil");
     NSURL *newURL = [self createFile:@"new.txt" withContent:nil insideDirectory:_firstSubFolder];
-    NSDictionary *changes = [item directoryChanges:YES];
+    NSDictionary *changes = [_testItem directoryChanges:YES];
     XCTAssertNotNil(changes, @"changes should not be nil");
     XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
     NSArray *add = [changes objectForKey:kAddDictionaryKey];
@@ -273,13 +270,12 @@
 }
 
 - (void)testDirectoryChangesPerfomance {
-    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
-    [item loadChildren];
-    XCTAssertNotNil(item, @"should not be nil");
+    [_testItem loadChildren];
+    XCTAssertNotNil(_testItem, @"should not be nil");
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
 
-        NSDictionary *changes = [item directoryChanges:NO];
+        NSDictionary *changes = [_testItem directoryChanges:NO];
         XCTAssertNotNil(changes, @"changes should not be nil");
         XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
     }];
@@ -294,7 +290,6 @@
 }
 
 - (void)testUpdate_deepAddFile {
-    <#given - when - then#>
 }
 - (void)testLoadingPerfomance {
     [self measureBlock:^{
@@ -304,7 +299,7 @@
     }];
 }
 
-- (void)testPerformanceExample {
+- (void)testDirectoryItemParamaterPerformance {
     // This is an example of a performance test case.
     NSURL *one = [_testFolder URLByAppendingPathComponent:@"one.txt"];
     WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:one];

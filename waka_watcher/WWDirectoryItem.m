@@ -15,13 +15,15 @@ NSString *const kDeleteDictionaryKey = @"delete";
 
 @implementation WWDirectoryItem
 
-- (instancetype)initWithUrl:(NSURL *)url withProject:(nullable NSString *)projectName {
+- (instancetype)initWithUrl:(NSURL *)url
+                   inParent:(WWDirectoryItem *)parent
+                withProject:(nullable NSString *)projectName {
     self = [super init];
     if (self) {
         if (nil != url) {
             _url = [url copy];
             _path = [[url path] copy];
-
+            _parent = parent;
             NSNumber *isDirectory;
             NSError *error;
             _shouldWatch = NO;
@@ -36,19 +38,36 @@ NSString *const kDeleteDictionaryKey = @"delete";
                 }
                 _isDirectory = NO;
             }
+            NSDate *fileDate;
+
+            if ([self.url getResourceValue:&fileDate
+                                    forKey:NSURLContentModificationDateKey
+                                     error:&error]) {
+                _modified = [fileDate copy];
+            }
+            error = nil;
+            if ([self.url getResourceValue:&fileDate forKey:NSURLCreationDateKey error:&error]) {
+                _created = [fileDate copy];
+            }
         }
         _project = projectName;
     }
     return self;
 }
 
+- (instancetype)initWithUrl:(NSURL *)url inParent:(WWDirectoryItem *)parent {
+    return [self initWithUrl:url inParent:parent withProject:nil];
+}
+
 - (instancetype)initWithUrl:(NSURL *)url {
-    return [self initWithUrl:url withProject:nil];
+    return [self initWithUrl:url inParent:nil withProject:nil];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-    WWDirectoryItem *copy = [[WWDirectoryItem alloc] initWithUrl:self.url withProject:self.project];
-
+    WWDirectoryItem *copy = [[WWDirectoryItem alloc] initWithUrl:self.url
+                                                        inParent:self.parent
+                                                     withProject:self.project];
+    copy.delegate = self.delegate;
     if (self.url == nil) {
         copy.path = _path;
         copy.lastChange = _lastChange;
@@ -57,7 +76,6 @@ NSString *const kDeleteDictionaryKey = @"delete";
         copy.icon = _icon;
         copy.isDirectory = _isDirectory;
         copy.project = _project;
-        copy.delegate = _delegate;
     }
     return copy;
 }
@@ -67,44 +85,6 @@ NSString *const kDeleteDictionaryKey = @"delete";
         return [self.url lastPathComponent];
     } else {
         return @"";
-    }
-}
-
-- (NSDate *)created {
-    if (nil != self.url) {
-        @synchronized(self) {
-            if (nil == _created) {
-                NSDate *fileDate;
-                NSError *error;
-                [self.url getResourceValue:&fileDate forKey:NSURLCreationDateKey error:&error];
-                if (!error) {
-                    _created = [fileDate copy];
-                }
-            }
-        }
-        return _created;
-    } else {
-        return nil;
-    }
-}
-
-- (NSDate *)modified {
-    if (nil != self.url) {
-        @synchronized(self) {
-            if (nil == _modified) {
-                NSDate *fileDate;
-                NSError *error;
-                [self.url getResourceValue:&fileDate
-                                    forKey:NSURLContentModificationDateKey
-                                     error:&error];
-                if (!error) {
-                    _modified = [fileDate copy];
-                }
-            }
-        }
-        return _modified;
-    } else {
-        return nil;
     }
 }
 
@@ -183,7 +163,8 @@ NSString *const kDeleteDictionaryKey = @"delete";
         // Handle the error
     }
     for (NSURL *url in array) {
-        WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:url withProject:self.project];
+        WWDirectoryItem *item =
+            [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
         [self.children addObject:item];
         if (item.isDirectory) {
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -193,6 +174,9 @@ NSString *const kDeleteDictionaryKey = @"delete";
         }
     }
     self.isLoading = NO;
+}
+
+- (void)updateChildren:(BOOL)deep {
 }
 
 - (NSDictionary *)directoryChanges:(BOOL)deep {
@@ -221,6 +205,7 @@ NSString *const kDeleteDictionaryKey = @"delete";
                 isFound = true;
                 NSDate *fileDate;
                 NSError *error;
+                ;
                 [self.url getResourceValue:&fileDate
                                     forKey:NSURLContentModificationDateKey
                                      error:&error];
@@ -229,30 +214,34 @@ NSString *const kDeleteDictionaryKey = @"delete";
                         isModfied = true;
                     }
                 }
+                if (deep && item.isDirectory) {
+                    NSDictionary *childChanges = [item directoryChanges:deep];
+                    NSArray *childAdd = [childChanges objectForKey:kAddDictionaryKey];
+                    NSArray *childDelete = [childChanges objectForKey:kDeleteDictionaryKey];
+                    NSArray *childModified = [childChanges objectForKey:kModifiedDictionaryKey];
+                    [add addObjectsFromArray:childAdd];
+                    [modified addObjectsFromArray:childModified];
+                    [delete addObjectsFromArray:childDelete];
+                }
                 break;
             }
         }
         if (isModfied) {
             WWDirectoryItem *modifiedItem =
-                [[WWDirectoryItem alloc] initWithUrl:url withProject:self.project];
+            [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
             [modified addObject:modifiedItem];
         } else if (!isFound) {
             WWDirectoryItem *addItem =
-                [[WWDirectoryItem alloc] initWithUrl:url withProject:self.project];
+                [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
             [add addObject:addItem];
         }
     }
     // find if items have been deleted
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     for (WWDirectoryItem *item in childrenArray) {
-        BOOL isFound = false;
-        for (NSURL *url in currentContents) {
-            if ([item.url isEqual:url]) {
-                isFound = true;
-                break;
-            }
-        }
-        if (!isFound) {
-            WWDirectoryItem *deleteItem = [WWDirectoryItem copy];
+        if (![fileManager fileExistsAtPath:item.path]) {
+            // we use the path because url can become nil if doesn't exist and this is a bit safer
+            WWDirectoryItem *deleteItem = [item copy];
             [delete addObject:deleteItem];
         }
     }

@@ -18,17 +18,8 @@ extern NSString *__nonnull const kAddDictionaryKey;
 extern NSString *__nonnull const kModifiedDictionaryKey;
 extern NSString *__nonnull const kDeleteDictionaryKey;
 
-@protocol WWDirectoryItemProtocol <NSObject>
-@optional
-- (void)directoryItem:(nonnull WWDirectoryItem *)item
-    childrenDidFinishLoading:(NSInteger)childCount;
-
-- (void)directoryItem:(nonnull WWDirectoryItem *)item
-    contentsDidChange:(nonnull NSIndexSet *)setOfChanges
-          changeEvent:(nullable CDEvent *)event;
-@end
-
 @interface WWDirectoryItem : WWDirectoryDataSource <NSCopying>
+@property (nullable, weak) WWDirectoryItem *parent;
 @property (nullable, copy) NSURL *url;
 @property (nonnull, copy) NSString *path; // incase the underlying file is deleted
 @property (nullable, copy) NSString *lastChange;
@@ -39,16 +30,18 @@ extern NSString *__nonnull const kDeleteDictionaryKey;
 @property (assign, nonatomic) BOOL shouldWatch;
 @property (nullable) NSString *project;
 @property (atomic, assign) BOOL isLoading;
-@property (weak) id<WWDirectoryItemProtocol> _Nullable delegate;
 @property (nullable) CDEvents *changeWatcher;
 
 - (nonnull instancetype)initWithUrl:(nonnull NSURL *)url
+                           inParent:(nullable WWDirectoryItem *)parent
                         withProject:(nullable NSString *)projectName;
 
+- (nonnull instancetype)initWithUrl:(nonnull NSURL *)url
+                           inParent:(nullable WWDirectoryItem *)parent;
 - (nonnull instancetype)initWithUrl:(nonnull NSURL *)url;
-
 - (nullable NSString *)fileName;
 
 - (void)loadChildren;
+- (void)updateChildren:(BOOL)deep;
 - (nonnull NSDictionary *)directoryChanges:(BOOL)deep;
 @end

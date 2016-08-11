@@ -96,6 +96,31 @@
     XCTAssertTrue([item isDirectory]);
 }
 
+- (void)testFolderWakaProjectFileExists {
+    WWDirectoryDataSource *ds = [WWDirectoryDataSource new];
+    NSIndexSet *set;
+    NSString *projectName = @"prject name";
+    NSData *projectNameAsData = [projectName dataUsingEncoding:NSUTF8StringEncoding];
+
+    [self createFile:@".wakatime-project" withContent:projectNameAsData insideDirectory:_library];
+    NSArray *urls = [NSArray arrayWithObject:_library];
+    set = [ds addURLs:urls withDelegate:nil];
+    WWDirectoryItem *item = [ds outlineView:[NSOutlineView new] child:0 ofItem:NULL];
+    XCTAssertNotNil(item);
+    XCTAssertNotNil(item.project);
+    XCTAssertTrue([projectName isEqualToString:item.project]);
+}
+
+- (void)testFolderWakaProjectFileNotExists {
+    WWDirectoryDataSource *ds = [WWDirectoryDataSource new];
+    NSIndexSet *set;
+    NSArray *urls = [NSArray arrayWithObject:_library];
+    set = [ds addURLs:urls withDelegate:nil];
+    WWDirectoryItem *item = [ds outlineView:[NSOutlineView new] child:0 ofItem:NULL];
+    XCTAssertNotNil(item);
+    XCTAssertNil(item.project);
+}
+
 - (void)testPerformanceAddURLsToEmptyDataSource {
     // This is an example of a performance test case.
     [self measureBlock:^{

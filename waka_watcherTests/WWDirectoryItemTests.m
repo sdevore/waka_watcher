@@ -8,6 +8,7 @@
 
 #import "SCDTestCase.h"
 #import "WWDirectoryItem.h"
+#import <OCMock/OCMock.h>
 
 @interface WWDirectoryItemTests : SCDTestCase {
     NSURL *_testFolder;
@@ -15,6 +16,7 @@
     NSURL *_secondSubFolder;
     NSURL *_thirdSubFolder;
     NSURL *_fourthSubFolder;
+    WWDirectoryItem *_testItem;
 }
 @end
 
@@ -60,13 +62,13 @@
     [self createFile:@"three.txt" withContent:nil insideDirectory:_fourthSubFolder];
     [self createFile:@"four.txt" withContent:nil insideDirectory:_fourthSubFolder];
 
-    NSLog(@"create four sub folders: \r%@\r%@\r%@\r%@", _firstSubFolder, _secondSubFolder,
-          _thirdSubFolder, _fourthSubFolder);
+    _testItem = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
 }
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each
     // test method in the class.
+    _testItem = nil;
     [super tearDown];
 }
 
@@ -77,7 +79,7 @@
     XCTAssertNotNil(item);
     XCTAssertNil(item.project);
 
-    item = [[WWDirectoryItem alloc] initWithUrl:one withProject:@"project"];
+    item = [[WWDirectoryItem alloc] initWithUrl:one inParent:NULL withProject:@"project"];
     XCTAssertEqualObjects(item.project, @"project");
 }
 - (void)testBasicAttributes {
@@ -102,20 +104,22 @@
     XCTAssertNotNil(changes, @"changes should not be nil");
     XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
     XCTAssertNotNil([changes objectForKey:kAddDictionaryKey], @"add object should exist");
-    XCTAssertEqual([[changes objectForKey:kAddDictionaryKey] count], 0, @"should be zero items although they may be empty");
+    XCTAssertEqual([[changes objectForKey:kAddDictionaryKey] count], 0,
+                   @"should be zero items although they may be empty");
     XCTAssertNotNil([changes objectForKey:kModifiedDictionaryKey], @"modified object should exist");
-    XCTAssertEqual([[changes objectForKey:kModifiedDictionaryKey] count], 0, @"should be zero items although they may be empty");
+    XCTAssertEqual([[changes objectForKey:kModifiedDictionaryKey] count], 0,
+                   @"should be zero items although they may be empty");
     XCTAssertNotNil([changes objectForKey:kDeleteDictionaryKey], @"delete object should exist");
-    XCTAssertEqual([[changes objectForKey:kDeleteDictionaryKey] count], 0, @"should be 0 items although they may be empty");
+    XCTAssertEqual([[changes objectForKey:kDeleteDictionaryKey] count], 0,
+                   @"should be 0 items although they may be empty");
 }
 
 - (void)testDirectoryChangesAddFile {
     WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
     [item loadChildren];
     XCTAssertNotNil(item, @"should not be nil");
-   
     NSURL *newURL = [self createFile:@"new.txt" withContent:nil insideDirectory:_testFolder];
-     NSDictionary *changes = [item directoryChanges:NO];
+    NSDictionary *changes = [item directoryChanges:NO];
     XCTAssertNotNil(changes, @"changes should not be nil");
     XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
     NSArray *add = [changes objectForKey:kAddDictionaryKey];
@@ -123,48 +127,180 @@
     XCTAssertEqual([add count], 1, @"should be zero items although they may be empty");
     WWDirectoryItem *addedItem = [add objectAtIndex:0];
     XCTAssertNotNil(addedItem, @"add object should exist");
-    XCTAssertEqualObjects(newURL.path, [addedItem.url path], @"url should match");
+    XCTAssertTrue([self expected:newURL isEqualToActual:addedItem.url], @"url should match");
     XCTAssertNotNil([changes objectForKey:kModifiedDictionaryKey], @"modified object should exist");
-    XCTAssertEqual([[changes objectForKey:kModifiedDictionaryKey] count], 0, @"should be zero items although they may be empty");
+    XCTAssertEqual([[changes objectForKey:kModifiedDictionaryKey] count], 0,
+                   @"should be zero items although they may be empty");
     XCTAssertNotNil([changes objectForKey:kDeleteDictionaryKey], @"delete object should exist");
-    XCTAssertEqual([[changes objectForKey:kDeleteDictionaryKey] count], 0, @"should be 0 items although they may be empty");
-
-    
+    XCTAssertEqual([[changes objectForKey:kDeleteDictionaryKey] count], 0,
+                   @"should be 0 items although they may be empty");
 }
 
 - (void)testDirectoryChangesDeleteFile {
-    XCTAssert(false, @"not written");
+    NSString *uuidNameFile = [[[NSUUID UUID] UUIDString] stringByAppendingPathExtension:@"txt"];
+    NSURL *newURL = [self createFile:uuidNameFile withContent:nil insideDirectory:_testFolder];
+    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
+    [item loadChildren];
+    XCTAssertNotNil(item, @"should not be nil");
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:newURL.path]) {
+        [fileManager removeItemAtPath:newURL.path error:nil];
+    }
+
+    NSDictionary *changes = [item directoryChanges:NO];
+    XCTAssertNotNil(changes, @"changes should not be nil");
+    XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
+    NSArray *delete = [changes objectForKey:kDeleteDictionaryKey];
+    XCTAssertNotNil(delete, @"delete object should exist");
+    XCTAssertEqual([delete count], 1, @"should be zero items although they may be empty");
+    WWDirectoryItem *deletedItem = [delete objectAtIndex:0];
+    XCTAssertNotNil(deletedItem, @"delete object should exist");
+    NSString *newURLLastPathComponent = [newURL.path lastPathComponent];
+    NSString *deletedItemLastPathComponent = [deletedItem.path lastPathComponent];
+    XCTAssertEqualObjects(newURLLastPathComponent, deletedItemLastPathComponent,
+                          @"url should match");
 }
 
 - (void)testDirectoryChangesModifyFile {
-    XCTAssert(false, @"not written");
+    NSString *uuidNameFile = [[[NSUUID UUID] UUIDString] stringByAppendingPathExtension:@"txt"];
+    NSURL *newURL = [self createFile:uuidNameFile withContent:nil insideDirectory:_testFolder];
+    NSDate *now = [NSDate date];
+    NSDate *yesterday = [now dateByAddingTimeInterval:-86400.0];
+    [newURL setResourceValue:yesterday forKey:NSURLContentModificationDateKey error:nil];
+    [newURL setResourceValue:yesterday forKey:NSURLCreationDateKey error:nil];
+    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
+    [item loadChildren];
+    XCTAssertNotNil(item, @"should not be nil");
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    NSError *error;
+    if ([fileManager fileExistsAtPath:newURL.path]) {
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingToURL:newURL error:&error];
+        [fileHandle seekToEndOfFile];
+        [fileHandle writeData:[@"stuff to add" dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandle closeFile];
+    }
+    // nsurl does cache some resources for the duration of the run loop in some cases
+    [newURL removeAllCachedResourceValues];
+    NSDictionary *changes = [item directoryChanges:NO];
+    XCTAssertNotNil(changes, @"changes should not be nil");
+    XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
+    NSArray *modified = [changes objectForKey:kModifiedDictionaryKey];
+    XCTAssertNotNil(modified, @"modified object should exist");
+    XCTAssertEqual([modified count], 1, @"should be one items although they may be empty");
+    WWDirectoryItem *modifiedItem = [modified objectAtIndex:0];
+    XCTAssertNotNil(modifiedItem, @"modified object should exist");
+    XCTAssertTrue([self expected:newURL isEqualToActual:modifiedItem.url], @"url should match");
 }
 
 - (void)testDirectoryChangesDeepAddFile {
-    XCTAssert(false, @"not written");
+    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
+    [item loadChildren];
+    XCTAssertNotNil(item, @"should not be nil");
+    NSURL *newURL = [self createFile:@"new.txt" withContent:nil insideDirectory:_firstSubFolder];
+    NSDictionary *changes = [item directoryChanges:YES];
+    XCTAssertNotNil(changes, @"changes should not be nil");
+    XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
+    NSArray *add = [changes objectForKey:kAddDictionaryKey];
+    XCTAssertNotNil(add, @"add object should exist");
+    XCTAssertEqual([add count], 1, @"should be zero items although they may be empty");
+    WWDirectoryItem *addedItem = [add objectAtIndex:0];
+    XCTAssertNotNil(addedItem, @"add object should exist");
+    XCTAssertTrue([self expected:newURL isEqualToActual:addedItem.url], @"url should match");
+    XCTAssertNotNil([changes objectForKey:kModifiedDictionaryKey], @"modified object should exist");
+    XCTAssertEqual([[changes objectForKey:kModifiedDictionaryKey] count], 0,
+                   @"should be zero items although they may be empty");
+    XCTAssertNotNil([changes objectForKey:kDeleteDictionaryKey], @"delete object should exist");
+    XCTAssertEqual([[changes objectForKey:kDeleteDictionaryKey] count], 0,
+                   @"should be 0 items although they may be empty");
 }
 
 - (void)testDirectoryChangesDeepDeleteFile {
-    XCTAssert(false, @"not written");
+    NSString *uuidNameFile = [[[NSUUID UUID] UUIDString] stringByAppendingPathExtension:@"txt"];
+    NSURL *newURL = [self createFile:uuidNameFile withContent:nil insideDirectory:_firstSubFolder];
+    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
+    [item loadChildren];
+    XCTAssertNotNil(item, @"should not be nil");
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:newURL.path]) {
+        [fileManager removeItemAtPath:newURL.path error:nil];
+    }
+
+    NSDictionary *changes = [item directoryChanges:YES];
+    XCTAssertNotNil(changes, @"changes should not be nil");
+    XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
+    NSArray *delete = [changes objectForKey:kDeleteDictionaryKey];
+    XCTAssertNotNil(delete, @"delete object should exist");
+    XCTAssertEqual([delete count], 1, @"should be zero items although they may be empty");
+    WWDirectoryItem *deletedItem = [delete objectAtIndex:0];
+    XCTAssertNotNil(deletedItem, @"delete object should exist");
+    NSString *newURLLastPathComponent = [newURL.path lastPathComponent];
+    NSString *deletedItemLastPathComponent = [deletedItem.path lastPathComponent];
+    XCTAssertEqualObjects(newURLLastPathComponent, deletedItemLastPathComponent,
+                          @"url should match");
 }
 
 - (void)testDirectoryChangesDeepModifyFile {
-    XCTAssert(false, @"not written");
+    NSString *uuidNameFile = [[[NSUUID UUID] UUIDString] stringByAppendingPathExtension:@"txt"];
+    NSURL *newURL = [self createFile:uuidNameFile withContent:nil insideDirectory:_testFolder];
+    NSDate *now = [NSDate date];
+    NSDate *yesterday = [now dateByAddingTimeInterval:-86400.0];
+    [newURL setResourceValue:yesterday forKey:NSURLContentModificationDateKey error:nil];
+    [newURL setResourceValue:yesterday forKey:NSURLCreationDateKey error:nil];
+    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
+    [item loadChildren];
+    XCTAssertNotNil(item, @"should not be nil");
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    NSError *error;
+    if ([fileManager fileExistsAtPath:newURL.path]) {
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingToURL:newURL error:&error];
+        [fileHandle seekToEndOfFile];
+        [fileHandle writeData:[@"stuff to add" dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandle closeFile];
+    }
+    // nsurl does cache some resources for the duration of the run loop in some cases
+    [newURL removeAllCachedResourceValues];
+    NSDictionary *changes = [item directoryChanges:NO];
+    XCTAssertNotNil(changes, @"changes should not be nil");
+    XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
+    NSArray *modified = [changes objectForKey:kModifiedDictionaryKey];
+    XCTAssertNotNil(modified, @"modified object should exist");
+    XCTAssertEqual([modified count], 1, @"should be one items although they may be empty");
+    WWDirectoryItem *modifiedItem = [modified objectAtIndex:0];
+    XCTAssertNotNil(modifiedItem, @"modified object should exist");
+    XCTAssertTrue([self expected:newURL isEqualToActual:modifiedItem.url], @"url should match");
 }
 
 - (void)testDirectoryChangesPerfomance {
-    XCTAssert(false, @"not written");
+    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
+    [item loadChildren];
+    XCTAssertNotNil(item, @"should not be nil");
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
-        XCTAssert(false);
+
+        NSDictionary *changes = [item directoryChanges:NO];
+        XCTAssertNotNil(changes, @"changes should not be nil");
+        XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
     }];
 }
 
+- (void)testUpdate_noChanges {
+}
+
+- (void)testUpdate_addFile {
+}
+- (void)testUpdate_deleteFile {
+}
+
+- (void)testUpdate_deepAddFile {
+    <#given - when - then#>
+}
 - (void)testLoadingPerfomance {
-    XCTAssert(false, @"not written");
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
-        XCTAssert(false);
+        WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
+        [item loadChildren];
     }];
 }
 

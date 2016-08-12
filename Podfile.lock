@@ -22,8 +22,9 @@ PODS:
   - NSLogger (1.7.0):
     - NSLogger/Standard (= 1.7.0)
   - NSLogger/Standard (1.7.0)
-  - OCHamcrest (6.0.0)
-  - OCMock (3.3.1)
+  - OCHamcrest (5.4.0)
+  - OCMockito (3.0.2):
+    - OCHamcrest (~> 5.1)
   - OHHTTPStubs (5.1.0):
     - OHHTTPStubs/Default (= 5.1.0)
   - OHHTTPStubs/Core (5.1.0)
@@ -50,8 +51,7 @@ DEPENDENCIES:
   - MTEThreadsafeCollections (from `https://github.com/sdevore/MTEThreadsafeCollections.git`)
   - NSColor-Crayola
   - NSColor-Pantone
-  - OCHamcrest (~> 6.0)
-  - OCMock
+  - OCMockito (~> 3.0)
   - OHHTTPStubs
   - SAMKeychain
   - XCDLumberjackNSLogger
@@ -74,12 +74,12 @@ SPEC CHECKSUMS:
   NSColor-Crayola: 02175a36c323c5c33e263e84f500f0634ee78282
   NSColor-Pantone: 4729b971b2e5ac452c9eeba1286b5982e1435180
   NSLogger: daa17368272ddf10a0850c218fe49de23b50f2eb
-  OCHamcrest: fc8ab38149b97df8db8029a3f2157c951bf9081d
-  OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
+  OCHamcrest: 5c1d441c5a82fb18ac17c2aeb52ec1a99edb971b
+  OCMockito: 2cb6c2267cbc76537be56281cd47cdb5a7c27541
   OHHTTPStubs: 592f74439d2d72615115cf99a954237a3fbe26e5
   SAMKeychain: 1fc9ae02f576365395758b12888c84704eebc423
   XCDLumberjackNSLogger: b39a8d2fee8094b3d8bf9031cb97e2200971addb
 
-PODFILE CHECKSUM: 8dc3cdce6bc3c9dc9a33662361e91391218de7fb
+PODFILE CHECKSUM: cc73803b41143bd32806038e94a79a85ee19b5b3
 
 COCOAPODS: 1.0.0

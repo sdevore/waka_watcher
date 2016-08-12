@@ -59,7 +59,8 @@
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(queue, ^{
             BOOL shouldLoad = false;
-            if (nil != self.delegate && [self.delegate respondsToSelector:@selector(directoryDataSource:shouldLoadItem:)]) {
+            if (nil != self.delegate &&
+                [self.delegate respondsToSelector:@selector(directoryDataSource:shouldLoadItem:)]) {
                 if (![self.delegate directoryDataSource:self shouldLoadItem:item]) {
                     return;
                 }
@@ -69,8 +70,10 @@
                 shouldLoad = [self.delegate directoryDataSource:self willLoadItem:item];
             }
             if (shouldLoad) {
-                [item loadChildren];
-                if (nil != self.delegate && [self.delegate respondsToSelector:@selector(directoryDataSource:didLoadItem:)]){
+                [item loadChildren:YES async:YES];
+                if (nil != self.delegate &&
+                    [self.delegate
+                        respondsToSelector:@selector(directoryDataSource:didLoadItem:)]) {
                     [self.delegate directoryDataSource:self didLoadItem:item];
                 }
             }

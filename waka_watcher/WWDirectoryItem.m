@@ -80,6 +80,10 @@ NSString *const kDeleteDictionaryKey = @"delete";
     return copy;
 }
 
+- (NSString *)description {
+    return self.path;
+}
+
 - (NSString *)fileName {
     if (nil != self.url) {
         return [self.url lastPathComponent];
@@ -143,11 +147,21 @@ NSString *const kDeleteDictionaryKey = @"delete";
     }
 }
 
-- (void)loadChildren {
+- (void)loadChildren:(BOOL)deep async:(BOOL)async {
     if (!self.isDirectory) {
         return;
     }
+    if (nil != self.delegate &&
+        [self.delegate respondsToSelector:@selector(directoryDataSource:shouldLoadItem:)]) {
+        if (![self.delegate directoryDataSource:self.parent shouldLoadItem:self]) {
+            return;
+        }
+    }
     self.isLoading = YES;
+    if (nil != self.delegate &&
+        [self.delegate respondsToSelector:@selector(directoryDataSource:willLoadItem:)]) {
+        [self.delegate directoryDataSource:self.parent willLoadItem:self];
+    }
     NSError *error = nil;
     NSArray *properties = [NSArray
         arrayWithObjects:NSURLLocalizedNameKey, NSURLCreationDateKey,
@@ -165,18 +179,28 @@ NSString *const kDeleteDictionaryKey = @"delete";
     for (NSURL *url in array) {
         WWDirectoryItem *item =
             [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
+        item.delegate = self.delegate;
         [self.children addObject:item];
-        if (item.isDirectory) {
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-            dispatch_async(queue, ^{
-                [item loadChildren];
-            });
+        if (item.isDirectory && deep) {
+            if (async) {
+                dispatch_queue_t queue =
+                    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_async(queue, ^{
+                    [item loadChildren:deep async:YES];
+                });
+            } else {
+                [item loadChildren:deep async:NO];
+            }
         }
     }
     self.isLoading = NO;
+    if (nil != self.delegate &&
+        [self.delegate respondsToSelector:@selector(directoryDataSource:didLoadItem:)]) {
+        [self.delegate directoryDataSource:self.parent didLoadItem:self];
+    }
 }
 
-- (void)updateChildren:(BOOL)deep {
+- (void)updateChildren:(BOOL)deep async:(BOOL)async {
 }
 
 - (NSDictionary *)directoryChanges:(BOOL)deep {
@@ -228,7 +252,7 @@ NSString *const kDeleteDictionaryKey = @"delete";
         }
         if (isModfied) {
             WWDirectoryItem *modifiedItem =
-            [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
+                [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
             [modified addObject:modifiedItem];
         } else if (!isFound) {
             WWDirectoryItem *addItem =

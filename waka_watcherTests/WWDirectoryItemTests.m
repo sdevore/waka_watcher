@@ -6,9 +6,11 @@
 //  Copyright © 2016 Samuel DeVore. All rights reserved.
 //
 
+#import "MTEThreadsafeArray.h"
 #import "SCDTestCase.h"
 #import "WWDirectoryItem.h"
-#import <OCMock/OCMock.h>
+#import <OCHamcrest/OCHamcrest.h>
+#import <OCMockito/OCMockito.h>
 
 @interface WWDirectoryItemTests : SCDTestCase {
     NSURL *_testFolder;
@@ -96,8 +98,19 @@
     XCTAssertNotNil(item.icon);
 }
 
+- (void)testLoadChildrenDelegateCalls {
+    id<WWDirectoryDataSourceProtocol> delegate =
+        mockProtocol(@protocol(WWDirectoryDataSourceProtocol));
+    [given([delegate directoryDataSource:anything() shouldLoadItem:anything()]) willReturn:@YES];
+    _testItem.delegate = delegate;
+    [_testItem loadChildren:YES async:NO];
+    [verifyCount(delegate, atLeastOnce()) directoryDataSource:anything() shouldLoadItem:anything()];
+    [verifyCount(delegate, atLeastOnce()) directoryDataSource:anything() willLoadItem:anything()];
+    [verifyCount(delegate, atLeastOnce()) directoryDataSource:anything() didLoadItem:anything()];
+}
+
 - (void)testDirectoryChangesNone {
-    [_testItem loadChildren];
+    [_testItem loadChildren:YES async:NO];
     XCTAssertNotNil(_testItem, @"should not be nil");
     NSDictionary *changes = [_testItem directoryChanges:NO];
     XCTAssertNotNil(changes, @"changes should not be nil");
@@ -114,7 +127,7 @@
 }
 
 - (void)testDirectoryChangesAddFile {
-    [_testItem loadChildren];
+    [_testItem loadChildren:YES async:NO];
     XCTAssertNotNil(_testItem, @"should not be nil");
     NSURL *newURL = [self createFile:@"new.txt" withContent:nil insideDirectory:_testFolder];
     NSDictionary *changes = [_testItem directoryChanges:NO];
@@ -138,7 +151,7 @@
     NSString *uuidNameFile = [[[NSUUID UUID] UUIDString] stringByAppendingPathExtension:@"txt"];
     NSURL *newURL = [self createFile:uuidNameFile withContent:nil insideDirectory:_testFolder];
     WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
-    [item loadChildren];
+    [item loadChildren:YES async:NO];
     XCTAssertNotNil(item, @"should not be nil");
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:newURL.path]) {
@@ -167,7 +180,7 @@
     [newURL setResourceValue:yesterday forKey:NSURLContentModificationDateKey error:nil];
     [newURL setResourceValue:yesterday forKey:NSURLCreationDateKey error:nil];
     WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
-    [item loadChildren];
+    [item loadChildren:YES async:NO];
     XCTAssertNotNil(item, @"should not be nil");
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
@@ -192,7 +205,7 @@
 }
 
 - (void)testDirectoryChangesDeepAddFile {
-    [_testItem loadChildren];
+    [_testItem loadChildren:YES async:NO];
     XCTAssertNotNil(_testItem, @"should not be nil");
     NSURL *newURL = [self createFile:@"new.txt" withContent:nil insideDirectory:_firstSubFolder];
     NSDictionary *changes = [_testItem directoryChanges:YES];
@@ -216,7 +229,7 @@
     NSString *uuidNameFile = [[[NSUUID UUID] UUIDString] stringByAppendingPathExtension:@"txt"];
     NSURL *newURL = [self createFile:uuidNameFile withContent:nil insideDirectory:_firstSubFolder];
     WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
-    [item loadChildren];
+    [item loadChildren:YES async:NO];
     XCTAssertNotNil(item, @"should not be nil");
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:newURL.path]) {
@@ -245,7 +258,7 @@
     [newURL setResourceValue:yesterday forKey:NSURLContentModificationDateKey error:nil];
     [newURL setResourceValue:yesterday forKey:NSURLCreationDateKey error:nil];
     WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
-    [item loadChildren];
+    [item loadChildren:YES async:NO];
     XCTAssertNotNil(item, @"should not be nil");
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
@@ -270,11 +283,35 @@
 }
 
 - (void)testUpdate_noChanges {
-    [_testItem loadChildren];
-    
+    [_testItem loadChildren:YES async:NO];
+    NSArray *children = [[_testItem children] array];
+    assertThat(children, notNilValue());
+    assertThat(children, hasCountOf(8));
+    [_testItem updateChildren:YES async:NO];
+    NSArray *postChildren = [[_testItem children] array];
+    assertThat(postChildren, notNilValue());
+    assertThat(postChildren, hasCountOf(8));
 }
 
 - (void)testUpdate_addFile {
+    [_testItem loadChildren:YES async:NO];
+    NSArray *children = [[_testItem children] array];
+    assertThat(children, notNilValue());
+    assertThat(children, hasCountOf(8));
+    NSURL *newURL = [self createFile:@"new.txt" withContent:nil insideDirectory:_testFolder];
+    NSDictionary *changes = [_testItem directoryChanges:NO];
+    XCTAssertNotNil(changes, @"changes should not be nil");
+    XCTAssertEqual([changes count], 3, @"should be three items although they may be empty");
+    NSArray *add = [changes objectForKey:kAddDictionaryKey];
+    XCTAssertNotNil(add, @"add object should exist");
+    XCTAssertEqual([add count], 1, @"should be zero items although they may be empty");
+    WWDirectoryItem *addedItem = [add objectAtIndex:0];
+    XCTAssertNotNil(addedItem, @"add object should exist");
+    XCTAssertTrue([self expected:newURL isEqualToActual:addedItem.url], @"url should match");
+    [_testItem updateChildren:YES async:NO];
+    NSArray *postChildren = [[_testItem children] array];
+    assertThat(postChildren, notNilValue());
+    assertThat(postChildren, hasCountOf(8));
 }
 - (void)testUpdate_deleteFile {
 }
@@ -285,7 +322,7 @@
 #pragma mark - performance section
 
 - (void)testDirectoryChangesPerfomance {
-    [_testItem loadChildren];
+    [_testItem loadChildren:YES async:NO];
     XCTAssertNotNil(_testItem, @"should not be nil");
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
@@ -299,7 +336,7 @@
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
         WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
-        [item loadChildren];
+        [item loadChildren:YES async:NO];
     }];
 }
 

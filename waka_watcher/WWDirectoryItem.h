@@ -41,7 +41,7 @@ extern NSString *__nonnull const kDeleteDictionaryKey;
 - (nonnull instancetype)initWithUrl:(nonnull NSURL *)url;
 - (nullable NSString *)fileName;
 
-- (void)loadChildren;
-- (void)updateChildren:(BOOL)deep;
+- (void)loadChildren:(BOOL)deep async:(BOOL)async;
+- (void)updateChildren:(BOOL)deep async:(BOOL)async;
 - (nonnull NSDictionary *)directoryChanges:(BOOL)deep;
 @end

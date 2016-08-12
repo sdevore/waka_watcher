@@ -15,6 +15,7 @@
 
 @optional
 
+#pragma mark - children changes
 - (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
         addedItemsAtIndexes:(nonnull NSIndexSet *)indexSet;
 - (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
@@ -24,12 +25,15 @@
       toDirectoryDataSource:(nullable WWDirectoryDataSource *)destination
                     toIndex:(NSInteger)toIndex;
 
+#pragma mark - loading
 - (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
              shouldLoadItem:(nullable WWDirectoryItem *)item;
 - (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
-             willLoadItem:(nullable WWDirectoryItem *)item;
+               willLoadItem:(nullable WWDirectoryItem *)item;
 - (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
-               didLoadItem:(nullable WWDirectoryItem *)item;
+                didLoadItem:(nullable WWDirectoryItem *)item;
+
+#pragma mark - updating contents
 @end
 
 @interface WWDirectoryDataSource : NSObject <NSOutlineViewDataSource>

@@ -19,12 +19,12 @@ abstract_target 'waka_watcher' do
     
     target :waka_watcherTests do
         pod 'OHHTTPStubs'
-        pod 'OCMock'
-       pod 'OCHamcrest', '~> 6.0'
+        
+      
+       pod 'OCMockito', '~> 3.0'
     end
     target :waka_watcherUITests do
         pod 'OHHTTPStubs'
-        pod 'OCMock'
-        pod 'OCHamcrest', '~> 6.0'
+       
     end
 end

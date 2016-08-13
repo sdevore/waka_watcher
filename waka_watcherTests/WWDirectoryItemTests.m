@@ -311,7 +311,7 @@
     [_testItem updateChildren:YES async:NO];
     NSArray *postChildren = [[_testItem children] array];
     assertThat(postChildren, notNilValue());
-    assertThat(postChildren, hasCountOf(8));
+    assertThat(postChildren, hasCountOf(9));
 }
 - (void)testUpdate_deleteFile {
 }

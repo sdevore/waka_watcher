@@ -798,7 +798,6 @@
 			baseConfigurationReference = 381C9F374D54BFB81FD9A79A /* Pods-waka_watcher-waka_watcher.travis.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = waka_watcher/waka_watcher.pch;
@@ -846,7 +845,6 @@
 			baseConfigurationReference = 4B13AE6656B0C46EA9526928 /* Pods-waka_watcher-waka_watcher_heartbeat.travis.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = waka_watcher_heartbeat/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -940,7 +938,6 @@
 			baseConfigurationReference = D112A50AAB3F205A66339F6B /* Pods-waka_watcher-waka_watcher.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = waka_watcher/waka_watcher.pch;
@@ -957,7 +954,6 @@
 			baseConfigurationReference = C1CEF74A9A3D2E0116C7274B /* Pods-waka_watcher-waka_watcher.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = waka_watcher/waka_watcher.pch;
@@ -1035,7 +1031,6 @@
 			baseConfigurationReference = 01DDBD9B9228B2B9DD461996 /* Pods-waka_watcher-waka_watcher_heartbeat.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = waka_watcher_heartbeat/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -1051,7 +1046,6 @@
 			baseConfigurationReference = B507130C3C8BF0575CD0B24F /* Pods-waka_watcher-waka_watcher_heartbeat.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = waka_watcher_heartbeat/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;

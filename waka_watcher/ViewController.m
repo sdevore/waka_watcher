@@ -10,9 +10,10 @@
 #import "ModifiedView.h"
 #import "ProjectView.h"
 #import "ViewController.h"
+#import "WWChangesDataSource.h"
+#import "WWChangesHeaderView.h"
 #import "WWDirectoryDataSource.h"
 #import "WWDirectoryItem.h"
-
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -20,8 +21,11 @@
 
     // Do any additional setup after loading the view.
     self.outlineDatasource = [WWDirectoryDataSource new];
+    self.changesDatasource = [WWChangesDataSource new];
     [self.directoryView setDelegate:self];
     [self.directoryView setDataSource:self.outlineDatasource];
+    [self.recentChangesView setDelegate:self];
+    [self.recentChangesView setDataSource:self.changesDatasource];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -73,6 +77,37 @@
 - (IBAction)watchingDefault:(id)sender {
 }
 
+#pragma mark - NSTableViewDelegate methods
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
+    // Make the row view keep track of our main model object
+    WWChangesGroup *item = [self.changesDatasource tableView:tableView
+                                   objectValueForTableColumn:[NSTableColumn new]
+                                                         row:row];
+    WWChangesHeaderView *result = [[WWChangesHeaderView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
+    result.objectValue = item;
+    return result;
+}
+- (BOOL)tableView:(NSTableView *)tableView isGroupRow:(NSInteger)row {
+    return [self.changesDatasource isGroup:row];
+}
+
+- (NSView *)tableView:(NSTableView *)tableView
+   viewForTableColumn:(NSTableColumn *)tableColumn
+                  row:(NSInteger)row {
+    NSString *identifier = tableColumn.identifier;
+    if ([self tableView:tableView isGroupRow:row]) {
+        NSTextField *textField = [tableView makeViewWithIdentifier:@"TextCell" owner:self];
+
+        WWChangesGroup *item = [self.changesDatasource tableView:tableView
+                                       objectValueForTableColumn:tableColumn
+                                                             row:row];
+        [textField setStringValue:item.string];
+        return textField;
+
+    } else {
+    }
+    return nil;
+}
 #pragma mark - NSOutlineViewDelegate methods
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView

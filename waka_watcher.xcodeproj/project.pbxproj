@@ -11,6 +11,9 @@
 		2B06698D1D39755400CDD56A /* WWDirectoryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B06698C1D39755400CDD56A /* WWDirectoryDataSource.m */; };
 		2B2C304D1D399313009DBD6A /* FileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2C304C1D399313009DBD6A /* FileView.m */; };
 		2B2C30501D399328009DBD6A /* ModifiedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2C304F1D399328009DBD6A /* ModifiedView.m */; };
+		2B34F3701D80A0500021DD58 /* WWChangesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B34F36F1D80A0500021DD58 /* WWChangesDataSource.m */; };
+		2B34F3721D80A0740021DD58 /* WWChangesDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B34F3711D80A0740021DD58 /* WWChangesDataSourceTests.m */; };
+		2B34F3751D80DC530021DD58 /* WWChangesHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B34F3741D80DC530021DD58 /* WWChangesHeaderView.m */; };
 		2B38EB521D3EED7500D7C039 /* WWDirectoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B38EB511D3EED7500D7C039 /* WWDirectoryItem.m */; };
 		2B77BF271C36EE1A00A37049 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B77BF261C36EE1A00A37049 /* AppDelegate.m */; };
 		2B77BF2A1C36EE1A00A37049 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B77BF291C36EE1A00A37049 /* main.m */; };
@@ -104,6 +107,11 @@
 		2B2C304C1D399313009DBD6A /* FileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileView.m; sourceTree = "<group>"; };
 		2B2C304E1D399328009DBD6A /* ModifiedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifiedView.h; sourceTree = "<group>"; };
 		2B2C304F1D399328009DBD6A /* ModifiedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifiedView.m; sourceTree = "<group>"; };
+		2B34F36E1D80A0500021DD58 /* WWChangesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWChangesDataSource.h; sourceTree = "<group>"; };
+		2B34F36F1D80A0500021DD58 /* WWChangesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWChangesDataSource.m; sourceTree = "<group>"; };
+		2B34F3711D80A0740021DD58 /* WWChangesDataSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWChangesDataSourceTests.m; sourceTree = "<group>"; };
+		2B34F3731D80DC530021DD58 /* WWChangesHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWChangesHeaderView.h; sourceTree = "<group>"; };
+		2B34F3741D80DC530021DD58 /* WWChangesHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWChangesHeaderView.m; sourceTree = "<group>"; };
 		2B38EB501D3EED7500D7C039 /* WWDirectoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWDirectoryItem.h; sourceTree = "<group>"; };
 		2B38EB511D3EED7500D7C039 /* WWDirectoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWDirectoryItem.m; sourceTree = "<group>"; };
 		2B77BF221C36EE1A00A37049 /* Waka Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Waka Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +243,8 @@
 				2B2C304F1D399328009DBD6A /* ModifiedView.m */,
 				2BC561AE1D5BE37500B3A006 /* ProjectView.h */,
 				2BC561AF1D5BE37500B3A006 /* ProjectView.m */,
+				2B34F3731D80DC530021DD58 /* WWChangesHeaderView.h */,
+				2B34F3741D80DC530021DD58 /* WWChangesHeaderView.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -281,6 +291,8 @@
 				2B06698C1D39755400CDD56A /* WWDirectoryDataSource.m */,
 				2B38EB501D3EED7500D7C039 /* WWDirectoryItem.h */,
 				2B38EB511D3EED7500D7C039 /* WWDirectoryItem.m */,
+				2B34F36E1D80A0500021DD58 /* WWChangesDataSource.h */,
+				2B34F36F1D80A0500021DD58 /* WWChangesDataSource.m */,
 			);
 			path = waka_watcher;
 			sourceTree = "<group>";
@@ -306,6 +318,7 @@
 				2B83CB791D3FD79000EA4960 /* WWDirectoryDataSourceTests.m */,
 				2BA4E6851D513F8B00359024 /* WWDirectoryItemTests.m */,
 				2B2142E51D53B37C0006615D /* PrefixHeader.pch */,
+				2B34F3711D80A0740021DD58 /* WWChangesDataSourceTests.m */,
 			);
 			path = waka_watcherTests;
 			sourceTree = "<group>";
@@ -685,9 +698,11 @@
 				2B2C30501D399328009DBD6A /* ModifiedView.m in Sources */,
 				2B77BF2D1C36EE1A00A37049 /* ViewController.m in Sources */,
 				2B2C304D1D399313009DBD6A /* FileView.m in Sources */,
+				2B34F3701D80A0500021DD58 /* WWChangesDataSource.m in Sources */,
 				2B77BF2A1C36EE1A00A37049 /* main.m in Sources */,
 				2BC561B01D5BE37500B3A006 /* ProjectView.m in Sources */,
 				2B77BF271C36EE1A00A37049 /* AppDelegate.m in Sources */,
+				2B34F3751D80DC530021DD58 /* WWChangesHeaderView.m in Sources */,
 				2B38EB521D3EED7500D7C039 /* WWDirectoryItem.m in Sources */,
 				2BDBDC911D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */,
 			);
@@ -698,6 +713,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BBA7C261D40160C00FFF9B3 /* SCDTestCase.m in Sources */,
+				2B34F3721D80A0740021DD58 /* WWChangesDataSourceTests.m in Sources */,
 				2B83CB7A1D3FD79000EA4960 /* WWDirectoryDataSourceTests.m in Sources */,
 				2BA4E6861D513F8B00359024 /* WWDirectoryItemTests.m in Sources */,
 				2BBA7B2D1D40014E00FFF9B3 /* WWDirectoryDataSource.m in Sources */,
@@ -773,7 +789,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -874,7 +890,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -917,7 +933,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;

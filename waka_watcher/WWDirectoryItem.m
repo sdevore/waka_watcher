@@ -147,6 +147,9 @@ NSString *const kDeleteDictionaryKey = @"delete";
     }
 }
 
+- (void)update {
+}
+
 - (void)loadChildren:(BOOL)deep async:(BOOL)async {
     if (!self.isDirectory) {
         return;
@@ -181,6 +184,10 @@ NSString *const kDeleteDictionaryKey = @"delete";
             [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
         item.delegate = self.delegate;
         [self.children addObject:item];
+        if (nil != self.delegate &&
+            [self.delegate
+                respondsToSelector:@selector(directoryDataSource:addedItems:atIndexes:)]) {
+        }
         if (item.isDirectory && deep) {
             if (async) {
                 dispatch_queue_t queue =
@@ -198,16 +205,19 @@ NSString *const kDeleteDictionaryKey = @"delete";
         [self.delegate respondsToSelector:@selector(directoryDataSource:didLoadItem:)]) {
         [self.delegate directoryDataSource:self.parent didLoadItem:self];
     }
+    if (nil != self.delegate &&
+        [self respondsToSelector:@selector(directoryDataSource:addedItems:atIndexes:)]) {
+        NSArray *children = [self.children array];
+        NSIndexSet *indexSet =
+            [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, children.count - 1)];
+        [self.delegate directoryDataSource:self addedItems:children atIndexes:indexSet];
+    }
 }
 
 - (void)updateChildren:(BOOL)deep async:(BOOL)async {
-}
-
-- (NSDictionary *)directoryChanges:(BOOL)deep {
-    NSMutableDictionary *changes = [NSMutableDictionary dictionaryWithCapacity:3];
     NSMutableArray *add = [NSMutableArray array];
     NSMutableArray *modified = [NSMutableArray array];
-    NSMutableArray *delete = [NSMutableArray array];
+    NSMutableArray *deletes = [NSMutableArray array];
     NSError *error;
     // find changed and new items in the directory
     NSArray *properties = [NSArray
@@ -236,42 +246,85 @@ NSString *const kDeleteDictionaryKey = @"delete";
                 if (!error) {
                     if (![fileDate isEqualToDate:item.modified]) {
                         isModfied = true;
+                        [item update];
+                        [modified addObject:item];
                     }
                 }
                 if (deep && item.isDirectory) {
-                    NSDictionary *childChanges = [item directoryChanges:deep];
-                    NSArray *childAdd = [childChanges objectForKey:kAddDictionaryKey];
-                    NSArray *childDelete = [childChanges objectForKey:kDeleteDictionaryKey];
-                    NSArray *childModified = [childChanges objectForKey:kModifiedDictionaryKey];
-                    [add addObjectsFromArray:childAdd];
-                    [modified addObjectsFromArray:childModified];
-                    [delete addObjectsFromArray:childDelete];
+                    if (async) {
+                        dispatch_queue_t queue =
+                            dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                        dispatch_async(queue, ^{
+                            [item loadChildren:deep async:YES];
+                        });
+                    } else {
+                        [item loadChildren:deep async:NO];
+                    }
                 }
                 break;
             }
         }
-        if (isModfied) {
-            WWDirectoryItem *modifiedItem =
-                [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
-            [modified addObject:modifiedItem];
-        } else if (!isFound) {
+        if (!isFound) {
             WWDirectoryItem *addItem =
                 [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
             [add addObject:addItem];
         }
     }
+    if (nil != modified && 0 < modified.count) {
+        if (nil != self.delegate &&
+            [self.delegate
+                respondsToSelector:@selector(directoryDataSource:modifiedItems:atIndexes:)]) {
+            childrenArray = [self.children array];
+            NSMutableIndexSet *modifiedSet = [NSMutableIndexSet new];
+            for (WWDirectoryItem *modifiedItem in modified) {
+                [modifiedSet addIndex:[childrenArray indexOfObject:modifiedItem]];
+            }
+            [self.delegate directoryDataSource:self modifiedItems:modified atIndexes:modifiedSet];
+        }
+    }
+    if (nil != add && 0 < add.count) {
+        [self.children addObjects:add];
+        if (nil != self.delegate &&
+            [self.delegate
+                respondsToSelector:@selector(directoryDataSource:addedItems:atIndexes:)]) {
+            childrenArray = [self.children array];
+            NSMutableIndexSet *addSet = [NSMutableIndexSet new];
+            for (WWDirectoryItem *addItem in add) {
+                [addSet addIndex:[childrenArray indexOfObject:addItem]];
+            }
+            [self.delegate directoryDataSource:self addedItems:add atIndexes:addSet];
+        }
+    }
+
+    // handle deletes
     // find if items have been deleted
     NSFileManager *fileManager = [NSFileManager defaultManager];
     for (WWDirectoryItem *item in childrenArray) {
         if (![fileManager fileExistsAtPath:item.path]) {
             // we use the path because url can become nil if doesn't exist and this is a bit safer
             WWDirectoryItem *deleteItem = [item copy];
-            [delete addObject:deleteItem];
+            [deletes addObject:deleteItem];
         }
     }
-    [changes setObject:[NSArray arrayWithArray:add] forKey:kAddDictionaryKey];
-    [changes setObject:[NSArray arrayWithArray:modified] forKey:kModifiedDictionaryKey];
-    [changes setObject:[NSArray arrayWithArray:delete] forKey:kDeleteDictionaryKey];
-    return [NSDictionary dictionaryWithDictionary:changes];
+    if (nil != deletes) {
+        NSMutableIndexSet *deletedIndexSet = [NSMutableIndexSet new];
+        for (WWDirectoryItem *deletedItem in deletes) {
+            NSArray *children = [self.children array];
+            for (NSInteger ii = children.count - 1; ii >= 0; ii--) {
+                WWDirectoryItem *item = [children objectAtIndex:ii];
+                if ([[item.path lastPathComponent]
+                        isEqualToString:[deletedItem.path lastPathComponent]]) {
+                    [self.children removeObject:item];
+                    [deletedIndexSet addIndex:ii];
+                }
+            }
+        }
+        if ([deletedIndexSet count] > 0 && nil != self.delegate &&
+            [self.delegate
+                respondsToSelector:@selector(directoryDataSource:removedItems:atIndexes:)]) {
+            [self.delegate directoryDataSource:self removedItems:deletes atIndexes:deletedIndexSet];
+        }
+    }
 }
+
 @end

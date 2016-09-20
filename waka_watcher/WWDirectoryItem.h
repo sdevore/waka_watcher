@@ -41,7 +41,29 @@ extern NSString *__nonnull const kDeleteDictionaryKey;
 - (nonnull instancetype)initWithUrl:(nonnull NSURL *)url;
 - (nullable NSString *)fileName;
 
+/**
+ *  updates many of the properties of the item
+ */
+- (void)update;
+
+/**
+ *  Loads the children of the currently selected object, if a delegate is set and the delegate
+ * adopts the WWDirectoryDataSourceProtocol those methods will be called on the same thread that
+ * loadChildren:async: is called on
+ *
+ *  @param deep  if the each child shall be loaded as well
+ *  @param async if true and deep is true then loading of children will happen asyncronously
+ */
 - (void)loadChildren:(BOOL)deep async:(BOOL)async;
+
+/**
+ *  update the children of the current WWDirectoryItem, if a delegate is set and the delegate adopts
+ * the WWDirectoryDataSourceProtocol those methods will be called on the same thread that
+ * updateChildren was called on
+ *
+ *  @param deep  if the each child shall be updateing as well
+ *  @param async if true and deep is true then updating of children will happen asyncronously
+ */
 - (void)updateChildren:(BOOL)deep async:(BOOL)async;
-- (nonnull NSDictionary *)directoryChanges:(BOOL)deep;
+
 @end

@@ -16,21 +16,27 @@
 @optional
 
 #pragma mark - children changes
-- (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
-        addedItemsAtIndexes:(nonnull NSIndexSet *)indexSet;
-- (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
-      removedItemsAtIndexes:(nonnull NSIndexSet *)indexSet;
-- (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
-            moveItemAtIndex:(NSInteger)fromIndex
-      toDirectoryDataSource:(nullable WWDirectoryDataSource *)destination
+- (void)directoryDataSource:(nullable WWDirectoryDataSource *)source
+                 addedItems:(nonnull NSArray *)items
+                  atIndexes:(nonnull NSIndexSet *)indexSet;
+- (void)directoryDataSource:(nullable WWDirectoryDataSource *)source
+              modifiedItems:(nonnull NSArray *)items
+                  atIndexes:(nonnull NSIndexSet *)indexSet;
+- (void)directoryDataSource:(nullable WWDirectoryDataSource *)source
+               removedItems:(nonnull NSArray *)items
+                  atIndexes:(nonnull NSIndexSet *)indexSet;
+- (void)directoryDataSource:(nullable WWDirectoryDataSource *)source
+                   moveItem:(nonnull WWDirectoryItem *)item
+                    atIndex:(NSInteger)fromIndex
+                     toItem:(nullable WWDirectoryItem *)destination
                     toIndex:(NSInteger)toIndex;
 
 #pragma mark - loading
 - (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
              shouldLoadItem:(nullable WWDirectoryItem *)item;
-- (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
+- (void)directoryDataSource:(nullable WWDirectoryDataSource *)source
                willLoadItem:(nullable WWDirectoryItem *)item;
-- (BOOL)directoryDataSource:(nullable WWDirectoryDataSource *)source
+- (void)directoryDataSource:(nullable WWDirectoryDataSource *)source
                 didLoadItem:(nullable WWDirectoryItem *)item;
 
 #pragma mark - updating contents

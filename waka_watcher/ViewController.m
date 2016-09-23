@@ -94,7 +94,7 @@
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
-    NSString *identifier = tableColumn.identifier;
+   
     if ([self tableView:tableView isGroupRow:row]) {
         NSTextField *textField = [tableView makeViewWithIdentifier:@"TextCell" owner:self];
 

@@ -38,6 +38,8 @@
 		2BC561B01D5BE37500B3A006 /* ProjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC561AF1D5BE37500B3A006 /* ProjectView.m */; };
 		2BDBDC911D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
 		2BDBDC921D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
+		2BE8FD921D94B351009F876B /* WWChangesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B34F36F1D80A0500021DD58 /* WWChangesDataSource.m */; };
+		2BE8FD931D94B355009F876B /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
 		3653C272208D61BCDA4D2658 /* libPods-waka_watcher-waka_watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E50E3E4B7E31CDF9D77EDE /* libPods-waka_watcher-waka_watcher.a */; };
 		7F06D639330A830A243E0885 /* libPods-waka_watcher-waka_watcher_heartbeat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A6B5369B09D2F46F04BBB3 /* libPods-waka_watcher-waka_watcher_heartbeat.a */; };
 		843F3B81A159BFC6E59AE84A /* libPods-waka_watcher-waka_watcherUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00BD530B2F8038FDF7EFB7D9 /* libPods-waka_watcher-waka_watcherUITests.a */; };
@@ -714,9 +716,11 @@
 			files = (
 				2BBA7C261D40160C00FFF9B3 /* SCDTestCase.m in Sources */,
 				2B34F3721D80A0740021DD58 /* WWChangesDataSourceTests.m in Sources */,
+				2BE8FD921D94B351009F876B /* WWChangesDataSource.m in Sources */,
 				2B83CB7A1D3FD79000EA4960 /* WWDirectoryDataSourceTests.m in Sources */,
 				2BA4E6861D513F8B00359024 /* WWDirectoryItemTests.m in Sources */,
 				2BBA7B2D1D40014E00FFF9B3 /* WWDirectoryDataSource.m in Sources */,
+				2BE8FD931D94B355009F876B /* SCDFolderMonitor.m in Sources */,
 				2BBA7B2E1D40015300FFF9B3 /* WWDirectoryItem.m in Sources */,
 				2B77BF3D1C36EE1A00A37049 /* waka_watcherTests.m in Sources */,
 			);

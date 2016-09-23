@@ -312,15 +312,15 @@
 		2B77BF3B1C36EE1A00A37049 /* waka_watcherTests */ = {
 			isa = PBXGroup;
 			children = (
-				2BBA7C271D40166900FFF9B3 /* TestResources */,
+				2B77BF3E1C36EE1A00A37049 /* Info.plist */,
+				2B2142E51D53B37C0006615D /* PrefixHeader.pch */,
 				2BBA7C241D40160C00FFF9B3 /* SCDTestCase.h */,
 				2BBA7C251D40160C00FFF9B3 /* SCDTestCase.m */,
+				2BBA7C271D40166900FFF9B3 /* TestResources */,
 				2B77BF3C1C36EE1A00A37049 /* waka_watcherTests.m */,
-				2B77BF3E1C36EE1A00A37049 /* Info.plist */,
+				2B34F3711D80A0740021DD58 /* WWChangesDataSourceTests.m */,
 				2B83CB791D3FD79000EA4960 /* WWDirectoryDataSourceTests.m */,
 				2BA4E6851D513F8B00359024 /* WWDirectoryItemTests.m */,
-				2B2142E51D53B37C0006615D /* PrefixHeader.pch */,
-				2B34F3711D80A0740021DD58 /* WWChangesDataSourceTests.m */,
 			);
 			path = waka_watcherTests;
 			sourceTree = "<group>";
@@ -718,10 +718,10 @@
 				2B34F3721D80A0740021DD58 /* WWChangesDataSourceTests.m in Sources */,
 				2BE8FD921D94B351009F876B /* WWChangesDataSource.m in Sources */,
 				2B83CB7A1D3FD79000EA4960 /* WWDirectoryDataSourceTests.m in Sources */,
-				2BA4E6861D513F8B00359024 /* WWDirectoryItemTests.m in Sources */,
 				2BBA7B2D1D40014E00FFF9B3 /* WWDirectoryDataSource.m in Sources */,
-				2BE8FD931D94B355009F876B /* SCDFolderMonitor.m in Sources */,
+				2BA4E6861D513F8B00359024 /* WWDirectoryItemTests.m in Sources */,
 				2BBA7B2E1D40015300FFF9B3 /* WWDirectoryItem.m in Sources */,
+				2BE8FD931D94B355009F876B /* SCDFolderMonitor.m in Sources */,
 				2B77BF3D1C36EE1A00A37049 /* waka_watcherTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

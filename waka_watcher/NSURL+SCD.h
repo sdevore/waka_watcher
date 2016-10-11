@@ -10,4 +10,15 @@
 
 @interface NSURL (SCD)
 
+
+
+/**
+ compares two urls if they are file urls and they both are valid on file they will have
+ the actual resources compared
+
+ @param url the url to compare to
+
+ @return BOOL
+ */
+-(BOOL)scd_equalTo:(nonnull NSURL *)url;
 @end

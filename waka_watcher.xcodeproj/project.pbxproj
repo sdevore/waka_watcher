@@ -35,12 +35,15 @@
 		2BBA7C261D40160C00FFF9B3 /* SCDTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA7C251D40160C00FFF9B3 /* SCDTestCase.m */; };
 		2BBA7C291D40168E00FFF9B3 /* one_file.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA7C281D40168E00FFF9B3 /* one_file.txt */; };
 		2BBA7C2C1D4016BD00FFF9B3 /* two_file.text in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA7C2A1D40169B00FFF9B3 /* two_file.text */; };
+		2BC4E1DE1DAD64CD00AC589F /* NSURL+SCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4E1DD1DAD64CD00AC589F /* NSURL+SCD.m */; };
+		2BC4E1DF1DAD67FD00AC589F /* NSURL+SCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4E1DD1DAD64CD00AC589F /* NSURL+SCD.m */; };
 		2BC561B01D5BE37500B3A006 /* ProjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC561AF1D5BE37500B3A006 /* ProjectView.m */; };
 		2BDBDC911D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
 		2BDBDC921D3958ED006D6B0E /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
 		2BE8FD921D94B351009F876B /* WWChangesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B34F36F1D80A0500021DD58 /* WWChangesDataSource.m */; };
 		2BE8FD931D94B355009F876B /* SCDFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBDC901D3958ED006D6B0E /* SCDFolderMonitor.m */; };
 		3653C272208D61BCDA4D2658 /* libPods-waka_watcher-waka_watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E50E3E4B7E31CDF9D77EDE /* libPods-waka_watcher-waka_watcher.a */; };
+		73D7D743982F2483AFFBB5C8 /* NSURL+SCDTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D7DD0D504FDD8DF19F9C01 /* NSURL+SCDTest.m */; };
 		7F06D639330A830A243E0885 /* libPods-waka_watcher-waka_watcher_heartbeat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A6B5369B09D2F46F04BBB3 /* libPods-waka_watcher-waka_watcher_heartbeat.a */; };
 		843F3B81A159BFC6E59AE84A /* libPods-waka_watcher-waka_watcherUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00BD530B2F8038FDF7EFB7D9 /* libPods-waka_watcher-waka_watcherUITests.a */; };
 /* End PBXBuildFile section */
@@ -146,6 +149,8 @@
 		2BBA7C251D40160C00FFF9B3 /* SCDTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDTestCase.m; sourceTree = "<group>"; };
 		2BBA7C281D40168E00FFF9B3 /* one_file.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = one_file.txt; sourceTree = "<group>"; };
 		2BBA7C2A1D40169B00FFF9B3 /* two_file.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = two_file.text; sourceTree = "<group>"; };
+		2BC4E1DC1DAD64CD00AC589F /* NSURL+SCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+SCD.h"; sourceTree = "<group>"; };
+		2BC4E1DD1DAD64CD00AC589F /* NSURL+SCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+SCD.m"; sourceTree = "<group>"; };
 		2BC561AC1D5B9C2B00B3A006 /* .wakatime-project */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".wakatime-project"; sourceTree = "<group>"; };
 		2BC561AE1D5BE37500B3A006 /* ProjectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectView.h; sourceTree = "<group>"; };
 		2BC561AF1D5BE37500B3A006 /* ProjectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectView.m; sourceTree = "<group>"; };
@@ -154,6 +159,7 @@
 		381C9F374D54BFB81FD9A79A /* Pods-waka_watcher-waka_watcher.travis.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher.travis.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher/Pods-waka_watcher-waka_watcher.travis.xcconfig"; sourceTree = "<group>"; };
 		4B13AE6656B0C46EA9526928 /* Pods-waka_watcher-waka_watcher_heartbeat.travis.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher_heartbeat.travis.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher_heartbeat/Pods-waka_watcher-waka_watcher_heartbeat.travis.xcconfig"; sourceTree = "<group>"; };
 		7268504FC2D04D0A0E9BA366 /* Pods-waka_watcher-waka_watcherUITests.travis.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcherUITests.travis.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcherUITests/Pods-waka_watcher-waka_watcherUITests.travis.xcconfig"; sourceTree = "<group>"; };
+		73D7DD0D504FDD8DF19F9C01 /* NSURL+SCDTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+SCDTest.m"; sourceTree = "<group>"; };
 		A00FC19BE212B3F2504D812E /* libPods-waka_watcher-waka_watcherTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-waka_watcher-waka_watcherTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B507130C3C8BF0575CD0B24F /* Pods-waka_watcher-waka_watcher_heartbeat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher_heartbeat.release.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher_heartbeat/Pods-waka_watcher-waka_watcher_heartbeat.release.xcconfig"; sourceTree = "<group>"; };
 		C1CEF74A9A3D2E0116C7274B /* Pods-waka_watcher-waka_watcher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-waka_watcher-waka_watcher.release.xcconfig"; path = "Pods/Target Support Files/Pods-waka_watcher-waka_watcher/Pods-waka_watcher-waka_watcher.release.xcconfig"; sourceTree = "<group>"; };
@@ -295,6 +301,8 @@
 				2B38EB511D3EED7500D7C039 /* WWDirectoryItem.m */,
 				2B34F36E1D80A0500021DD58 /* WWChangesDataSource.h */,
 				2B34F36F1D80A0500021DD58 /* WWChangesDataSource.m */,
+				2BC4E1DC1DAD64CD00AC589F /* NSURL+SCD.h */,
+				2BC4E1DD1DAD64CD00AC589F /* NSURL+SCD.m */,
 			);
 			path = waka_watcher;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 				2B34F3711D80A0740021DD58 /* WWChangesDataSourceTests.m */,
 				2B83CB791D3FD79000EA4960 /* WWDirectoryDataSourceTests.m */,
 				2BA4E6851D513F8B00359024 /* WWDirectoryItemTests.m */,
+				73D7DD0D504FDD8DF19F9C01 /* NSURL+SCDTest.m */,
 			);
 			path = waka_watcherTests;
 			sourceTree = "<group>";
@@ -699,6 +708,7 @@
 				2B06698D1D39755400CDD56A /* WWDirectoryDataSource.m in Sources */,
 				2B2C30501D399328009DBD6A /* ModifiedView.m in Sources */,
 				2B77BF2D1C36EE1A00A37049 /* ViewController.m in Sources */,
+				2BC4E1DE1DAD64CD00AC589F /* NSURL+SCD.m in Sources */,
 				2B2C304D1D399313009DBD6A /* FileView.m in Sources */,
 				2B34F3701D80A0500021DD58 /* WWChangesDataSource.m in Sources */,
 				2B77BF2A1C36EE1A00A37049 /* main.m in Sources */,
@@ -715,6 +725,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BBA7C261D40160C00FFF9B3 /* SCDTestCase.m in Sources */,
+				2BC4E1DF1DAD67FD00AC589F /* NSURL+SCD.m in Sources */,
 				2B34F3721D80A0740021DD58 /* WWChangesDataSourceTests.m in Sources */,
 				2BE8FD921D94B351009F876B /* WWChangesDataSource.m in Sources */,
 				2B83CB7A1D3FD79000EA4960 /* WWDirectoryDataSourceTests.m in Sources */,
@@ -723,6 +734,7 @@
 				2BBA7B2E1D40015300FFF9B3 /* WWDirectoryItem.m in Sources */,
 				2BE8FD931D94B355009F876B /* SCDFolderMonitor.m in Sources */,
 				2B77BF3D1C36EE1A00A37049 /* waka_watcherTests.m in Sources */,
+				73D7D743982F2483AFFBB5C8 /* NSURL+SCDTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,7 +821,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -917,7 +929,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -956,7 +968,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};

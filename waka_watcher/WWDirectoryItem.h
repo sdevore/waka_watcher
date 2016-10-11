@@ -29,6 +29,7 @@ extern NSString *__nonnull const kDeleteDictionaryKey;
 @property (assign) BOOL isDirectory;
 @property (assign, nonatomic) BOOL shouldWatch;
 @property (nullable) NSString *project;
+@property (nullable) NSString *language;
 @property (atomic, assign) BOOL isLoading;
 @property (nullable) CDEvents *changeWatcher;
 

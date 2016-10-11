@@ -134,10 +134,15 @@ NSString *const kDeleteDictionaryKey = @"delete";
     _shouldWatch = shouldWatch;
     if (shouldWatch) {
         if (nil == self.changeWatcher) {
+            __weak typeof(self) weakSelf = self;
+            
             self.changeWatcher = [[CDEvents alloc]
                 initWithURLs:[NSArray arrayWithObject:self.url]
                        block:^(CDEvents *watcher, CDEvent *event) {
                            DDLogInfo(@"[Block] URLWatcher: %@\nEvent: %@", watcher, event);
+                           if (nil != weakSelf) {
+                               [weakSelf updateChildren:NO async:NO];
+                           }
                        }];
             DDLogInfo(@"-[CDEventsTestAppController run]:\n%@\n------\n%@", self.changeWatcher,
                       [self.changeWatcher streamDescription]);

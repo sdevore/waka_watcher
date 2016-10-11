@@ -93,10 +93,26 @@
     item = [[WWDirectoryItem alloc] initWithUrl:one inParent:NULL withProject:@"project"];
     XCTAssertEqualObjects(item.project, @"project");
 }
+
+- (void)testSetProjectname {
+    NSURL *one = [_testFolder URLByAppendingPathComponent:@"one.txt"];
+    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:one];
+    assertThat(item, notNilValue());
+    assertThat(item.project, nilValue());
+    item.project = @"string";
+    assertThat(item.project, equalTo(@"string"));
+}
+
+- (void)testSetLanguage {
+    NSURL *one = [_testFolder URLByAppendingPathComponent:@"one.txt"];
+    WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:one];
+    assertThat(item, notNilValue());
+    assertThat(item.language, nilValue());
+    item.language = @"language";
+    assertThat(item.language, equalTo(@"language"));
+}
 - (void)testBasicAttributes {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the
-    // correct results.
+
     NSURL *one = [_testFolder URLByAppendingPathComponent:@"one.txt"];
     XCTAssertNotNil(one);
     WWDirectoryItem *item = [[WWDirectoryItem alloc] initWithUrl:one];
@@ -184,6 +200,25 @@
                                                  removedItems:anything()
                                                     atIndexes:anything()];
 }
+
+- (void)testShouldWatch_updateDelegatesCalled {
+    
+    _testItem.delegate = self;
+    _testItem.shouldWatch = YES;
+    [_testItem loadChildren:YES async:NO];
+    NSURL *newURL = [self createFile:@"new.txt" withContent:nil insideDirectory:_testFolder];
+    
+    assertWithTimeout(5, thatEventually(_added), notNilValue());
+    assertWithTimeout(5, thatEventually([NSNumber numberWithInteger:_added.count]), equalToInteger(1));
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:newURL.path]) {
+        [fileManager removeItemAtPath:newURL.path error:nil];
+    }
+    
+    assertWithTimeout(5, thatEventually(_deleted), notNilValue());
+    assertWithTimeout(5, thatEventually([NSNumber numberWithInteger:_deleted.count]), equalToInteger(1));}
+
 #pragma mark - performance section
 
 - (void)testUpdatePerfomance {

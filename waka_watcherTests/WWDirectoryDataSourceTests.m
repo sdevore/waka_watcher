@@ -10,6 +10,8 @@
 #import "WWDirectoryDataSource.h"
 #import "WWDirectoryItem.h"
 #import <XCTest/XCTest.h>
+#import <OCHamcrest/OCHamcrest.h>
+#import <OCMockito/OCMockito.h>
 @interface WWDirectoryDataSourceTests : SCDTestCase
 
 @end
@@ -119,6 +121,26 @@
     WWDirectoryItem *item = [ds outlineView:[NSOutlineView new] child:0 ofItem:NULL];
     XCTAssertNotNil(item);
     XCTAssertNil(item.project);
+}
+
+-(void)testWatchingStateChanges {
+    WWDirectoryDataSource *ds = [WWDirectoryDataSource new];
+    NSIndexSet *set;
+    NSURL *url = _library;
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSArray *urls = [fm contentsOfDirectoryAtURL:url
+                      includingPropertiesForKeys:NULL
+                                         options:NSDirectoryEnumerationSkipsHiddenFiles
+                                           error:nil];
+    set = [ds addURLs:urls withDelegate:nil];
+    assertThatInteger(ds.watching, equalToInteger(NSOffState));
+    [ds setWatching:NSOnState];
+    NSInteger result = ds.watching;
+    assertThatInteger(ds.watching, equalToInteger(NSOnState));
+    WWDirectoryItem *item = [ds outlineView:[NSOutlineView new] child:0 ofItem:nil];
+    assertThat(item, notNilValue());
+               
+    
 }
 
 - (void)testPerformanceAddURLsToEmptyDataSource {

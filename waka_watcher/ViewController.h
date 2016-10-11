@@ -12,7 +12,7 @@
 @class WWChangesDataSource;
 @class WWDirectoryItemProtocol;
 
-@interface ViewController : NSViewController <NSOutlineViewDelegate, NSTableViewDelegate>
+@interface ViewController : NSViewController <WWDirectoryDataSourceProtocol, NSOutlineViewDelegate, NSTableViewDelegate>
 @property (nullable, weak) IBOutlet NSButton *watchingButton;
 @property (nullable, weak) IBOutlet NSTableView *recentChangesView;
 @property (nullable, weak) IBOutlet NSOutlineView *directoryView;

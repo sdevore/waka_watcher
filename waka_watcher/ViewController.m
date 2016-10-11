@@ -72,6 +72,9 @@
 }
 
 - (IBAction)watching:(id)sender {
+    if (self.outlineDatasource != nil) {
+        [self.outlineDatasource setWatching:YES];
+    }
 }
 
 - (IBAction)watchingDefault:(id)sender {
@@ -154,6 +157,20 @@
 - (void)directoryItem:(WWDirectoryItem *)item
     contentsDidChange:(NSIndexSet *)setOfChanges
           changeEvent:(CDEvent *)event {
+}
+
+-(void)directoryDataSource:(WWDirectoryDataSource *)source addedItems:(NSArray *)items atIndexes:(NSIndexSet *)indexSet {
+    [self.changesDatasource addedItems:items];
+    [self.recentChangesView reloadData];
+}
+
+-(void)directoryDataSource:(WWDirectoryDataSource *)source modifiedItems:(NSArray *)items atIndexes:(NSIndexSet *)indexSet {
+    [self.changesDatasource modifiedItems:items];
+    [self.recentChangesView reloadData];
+}
+-(void)directoryDataSource:(WWDirectoryDataSource *)source removedItems:(NSArray *)items atIndexes:(NSIndexSet *)indexSet {
+    [self.changesDatasource deletedItems:items];
+    [self.recentChangesView reloadData];
 }
 
 @end

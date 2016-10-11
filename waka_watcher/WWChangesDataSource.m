@@ -76,9 +76,91 @@
             for (WWDirectoryItem *item in modifiedArray) {
                 [modifiedSet addIndex:[__added.array indexOfObject:item]];
             }
-            [self.delegate changeDataSource:self modifiedItems:addedArray atIndexes:addedSet];
+            [self.delegate changeDataSource:self modifiedItems:modifiedArray atIndexes:addedSet];
         }
     }
+}
+
+-(void)deletedItems:(NSArray *)deleted {
+    NSMutableIndexSet *deletedSet = [NSMutableIndexSet new];
+    NSMutableArray *deletedArray = [NSMutableArray new];
+    NSMutableIndexSet *modifiedSet = [NSMutableIndexSet new];
+    NSMutableArray *modifiedArray = [NSMutableArray new];
+    for (WWDirectoryItem *deletedItem in deleted) {
+        BOOL found = NO;
+        NSArray *array = __deleted.array;
+        for (WWDirectoryItem *existing in array) {
+            // have to compare paths since url becomes invalid on items that don't exist
+            if ([existing.path isEqualToString:deletedItem.path]) {
+                [existing update];
+                found = true;
+                [modifiedArray addObject:existing];
+                break;
+            }
+        }
+        if (!found) {
+            [deletedArray addObject:deletedItem];
+            [__deleted addObject:deletedItem];
+        }
+    }
+    if ([deletedArray count] > 0) {
+        if ([self.delegate respondsToSelector:@selector(changeDataSource:addedItems:atIndexes:)]) {
+            for (WWDirectoryItem *item in deletedArray) {
+                [deletedSet addIndex:[__deleted.array indexOfObject:item]];
+            }
+            [self.delegate changeDataSource:self deletedItems:deletedArray atIndexes:deletedSet];
+        }
+    }
+    if ([modifiedArray count] > 0) {
+        if ([self.delegate respondsToSelector:@selector(changeDataSource:modifiedItems:atIndexes:)]) {
+            for (WWDirectoryItem *item in modifiedArray) {
+                [modifiedSet addIndex:[__deleted.array indexOfObject:item]];
+            }
+            [self.delegate changeDataSource:self modifiedItems:modifiedArray atIndexes:modifiedSet];
+        }
+    }
+
+}
+
+-(void)modifiedItems:(NSArray *)modified {
+    NSMutableIndexSet *newSet = [NSMutableIndexSet new];
+    NSMutableArray *newArray = [NSMutableArray new];
+    NSMutableIndexSet *modifiedSet = [NSMutableIndexSet new];
+    NSMutableArray *modifiedArray = [NSMutableArray new];
+    for (WWDirectoryItem *newItem in modified) {
+        BOOL found = NO;
+        NSArray *array = __modified.array;
+        for (WWDirectoryItem *existing in array) {
+            // have to compare paths since url becomes invalid on items that don't exist
+            if ([existing.url scd_equalTo:newItem.url]) {
+                [existing update];
+                found = true;
+                [modifiedArray addObject:existing];
+                break;
+            }
+        }
+        if (!found) {
+            [newArray addObject:newItem];
+            [__modified addObject:newItem];
+        }
+    }
+    if ([newArray count] > 0) {
+        if ([self.delegate respondsToSelector:@selector(changeDataSource:modifiedItems:atIndexes:)]) {
+            for (WWDirectoryItem *item in newArray) {
+                [modifiedSet addIndex:[__modified.array indexOfObject:item]];
+            }
+            [self.delegate changeDataSource:self modifiedItems:newArray atIndexes:newSet];
+        }
+    }
+    if ([modifiedArray count] > 0) {
+        if ([self.delegate respondsToSelector:@selector(changeDataSource:modifiedItems:atIndexes:)]) {
+            for (WWDirectoryItem *item in modifiedArray) {
+                [modifiedSet addIndex:[__modified.array indexOfObject:item]];
+            }
+            [self.delegate changeDataSource:self modifiedItems:modifiedArray atIndexes:modifiedSet];
+        }
+    }
+
 }
 
 -(NSDictionary *)getChanges:(BOOL)shouldFlush {
@@ -88,9 +170,18 @@
                               @"deleted":[NSArray arrayWithArray:__deleted.array]
                               };
     if (shouldFlush) {
+        NSMutableIndexSet *removedIndexSet = [NSMutableIndexSet new];
+        NSArray *removedItems = [[[NSArray arrayWithArray:__added.array] arrayByAddingObjectsFromArray:__modified.array] arrayByAddingObjectsFromArray:__deleted.array];
+        [removedIndexSet addIndexesInRange:NSMakeRange(1, __added.count)];
+        [removedIndexSet addIndexesInRange:NSMakeRange(2+__added.count , __modified.count)];
+        [removedIndexSet addIndexesInRange:NSMakeRange(3+__added.count + __modified.count , __deleted.count)];
+
         __added = [MTEThreadsafeArray new];
         __modified = [MTEThreadsafeArray new];
         __deleted = [MTEThreadsafeArray new];
+        if (nil != self.delegate && [self.delegate respondsToSelector:@selector(changeDataSource:deletedItems:atIndexes:)]) {
+            [self changeDataSource:self deletedItems:removedItems atIndexes:removedIndexSet];
+        }
     }
     
     return changes;

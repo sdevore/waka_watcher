@@ -141,9 +141,8 @@
     WWDirectoryItem *second = [[WWDirectoryItem alloc] initWithUrl:_firstSubFolder];
     [source modifiedItems:@[second]];
     assertThatInteger([source numberOfRowsInTableView:[NSTableView new]], equalToInteger(4));
-    [verifyCount(delegate, atLeastOnce()) changeDataSource:anything() deletedItems:anything() atIndexes:anything()];
+    [verifyCount(delegate, atLeastOnce()) changeDataSource:anything() modifiedItems:anything() atIndexes:anything()];
 }
-
 
 
 - (void)testPerformanceExample {

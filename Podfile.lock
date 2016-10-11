@@ -1,15 +1,15 @@
 PODS:
   - CDEvents (1.2.2)
-  - CocoaLumberjack (2.3.0):
-    - CocoaLumberjack/Default (= 2.3.0)
-    - CocoaLumberjack/Extensions (= 2.3.0)
-  - CocoaLumberjack/Core (2.3.0)
-  - CocoaLumberjack/Default (2.3.0):
+  - CocoaLumberjack (2.4.0):
+    - CocoaLumberjack/Default (= 2.4.0)
+    - CocoaLumberjack/Extensions (= 2.4.0)
+  - CocoaLumberjack/Core (2.4.0)
+  - CocoaLumberjack/Default (2.4.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.3.0):
+  - CocoaLumberjack/Extensions (2.4.0):
     - CocoaLumberjack/Default
   - DevMateKit (1.7.1)
-  - LetsMove (1.20)
+  - LetsMove (1.22)
   - MTEThreadsafeCollections (1.0.2):
     - MTEThreadsafeCollections/Array (= 1.0.2)
     - MTEThreadsafeCollections/Dictionary (= 1.0.2)
@@ -22,23 +22,23 @@ PODS:
   - NSLogger (1.7.0):
     - NSLogger/Standard (= 1.7.0)
   - NSLogger/Standard (1.7.0)
-  - OCHamcrest (5.4.0)
-  - OCMockito (3.0.2):
-    - OCHamcrest (~> 5.1)
-  - OHHTTPStubs (5.1.0):
-    - OHHTTPStubs/Default (= 5.1.0)
-  - OHHTTPStubs/Core (5.1.0)
-  - OHHTTPStubs/Default (5.1.0):
+  - OCHamcrest (6.0.0)
+  - OCMockito (4.0.1):
+    - OCHamcrest (~> 6.0)
+  - OHHTTPStubs (5.2.1):
+    - OHHTTPStubs/Default (= 5.2.1)
+  - OHHTTPStubs/Core (5.2.1)
+  - OHHTTPStubs/Default (5.2.1):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.1.0):
+  - OHHTTPStubs/JSON (5.2.1):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.1.0):
+  - OHHTTPStubs/NSURLSession (5.2.1):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.1.0)
-  - SAMKeychain (1.5.0)
+  - OHHTTPStubs/OHPathHelpers (5.2.1)
+  - SAMKeychain (1.5.2)
   - XCDLumberjackNSLogger (1.1.0):
     - CocoaLumberjack (~> 2.0)
     - NSLogger (~> 1.7)
@@ -51,7 +51,7 @@ DEPENDENCIES:
   - MTEThreadsafeCollections (from `https://github.com/sdevore/MTEThreadsafeCollections.git`)
   - NSColor-Crayola
   - NSColor-Pantone
-  - OCMockito (~> 3.0)
+  - OCMockito
   - OHHTTPStubs
   - SAMKeychain
   - XCDLumberjackNSLogger
@@ -67,19 +67,19 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   CDEvents: f311f23de13414f4b3625f1a663b2e1d9a85d982
-  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
+  CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
   DevMateKit: 3ba77083f5faa40266e0d2d70776de2a82c71dd0
-  LetsMove: 40dda5f7a19bf9976e150ce304fa5765892bef8f
+  LetsMove: 407d4d14815e6dc1549b6a9fe8e4b0f6aed3e305
   MTEThreadsafeCollections: bd07b6ec31857c6cc9f32a5c4a6b3aa93f2be285
   NSColor-Crayola: 02175a36c323c5c33e263e84f500f0634ee78282
   NSColor-Pantone: 4729b971b2e5ac452c9eeba1286b5982e1435180
   NSLogger: daa17368272ddf10a0850c218fe49de23b50f2eb
-  OCHamcrest: 5c1d441c5a82fb18ac17c2aeb52ec1a99edb971b
-  OCMockito: 2cb6c2267cbc76537be56281cd47cdb5a7c27541
-  OHHTTPStubs: 592f74439d2d72615115cf99a954237a3fbe26e5
-  SAMKeychain: 1fc9ae02f576365395758b12888c84704eebc423
+  OCHamcrest: fc8ab38149b97df8db8029a3f2157c951bf9081d
+  OCMockito: 62ddc6afff6a883f2864d51224b1dfdc0e9a7df7
+  OHHTTPStubs: 3a42f25c00563b71355ac73112ba2324e9e6cef4
+  SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   XCDLumberjackNSLogger: b39a8d2fee8094b3d8bf9031cb97e2200971addb
 
-PODFILE CHECKSUM: cc73803b41143bd32806038e94a79a85ee19b5b3
+PODFILE CHECKSUM: 4b82bc923a913590a9ba1b18729a863f393ccf0b
 
 COCOAPODS: 1.0.0

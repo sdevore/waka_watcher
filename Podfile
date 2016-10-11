@@ -1,4 +1,4 @@
-platform :osx, '10.10'
+platform :osx, '10.11'
 abstract_target 'waka_watcher' do
     pod 'CocoaLumberjack'
     pod 'XCDLumberjackNSLogger'
@@ -21,7 +21,7 @@ abstract_target 'waka_watcher' do
         pod 'OHHTTPStubs'
         
       
-       pod 'OCMockito', '~> 3.0'
+       pod 'OCMockito'
     end
     target :waka_watcherUITests do
         pod 'OHHTTPStubs'

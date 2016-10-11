@@ -10,7 +10,7 @@
 
 #import "MTEThreadsafeArray.h"
 #import "WWDirectoryItem.h"
-
+#import "NSURL+SCD.h"
 @implementation WWChangesGroup
 - (id)copyWithZone:(NSZone *)zone {
     WWChangesGroup *new = [ WWChangesGroup new ];
@@ -29,6 +29,7 @@
 @property (nullable) MTEThreadsafeArray *_modified;
 @property (nullable) MTEThreadsafeArray *_deleted;
 
+
 @end
 @implementation WWChangesDataSource
 - (instancetype)init {
@@ -40,6 +41,62 @@
     }
     return self;
 }
+
+-(void)addedItems:(NSArray *)added {
+    NSMutableIndexSet *addedSet = [NSMutableIndexSet new];
+    NSMutableArray *addedArray = [NSMutableArray new];
+    NSMutableIndexSet *modifiedSet = [NSMutableIndexSet new];
+    NSMutableArray *modifiedArray = [NSMutableArray new];
+    for (WWDirectoryItem *addedItem in added) {
+        BOOL found = NO;
+        NSArray *array = __added.array;
+        for (WWDirectoryItem *existing in array) {
+            if ([existing.url scd_equalTo:addedItem.url]) {
+                [existing update];
+                found = true;
+                [modifiedArray addObject:existing];
+                break;
+            }
+        }
+        if (!found) {
+            [addedArray addObject:addedItem];
+            [__added addObject:addedItem];
+        }
+    }
+    if ([addedArray count] > 0) {
+        if ([self.delegate respondsToSelector:@selector(changeDataSource:addedItems:atIndexes:)]) {
+            for (WWDirectoryItem *item in addedArray) {
+                [addedSet addIndex:[__added.array indexOfObject:item]];
+            }
+            [self.delegate changeDataSource:self addedItems:addedArray atIndexes:addedSet];
+        }
+    }
+    if ([modifiedArray count] > 0) {
+        if ([self.delegate respondsToSelector:@selector(changeDataSource:modifiedItems:atIndexes:)]) {
+            for (WWDirectoryItem *item in modifiedArray) {
+                [modifiedSet addIndex:[__added.array indexOfObject:item]];
+            }
+            [self.delegate changeDataSource:self modifiedItems:addedArray atIndexes:addedSet];
+        }
+    }
+}
+
+-(NSDictionary *)getChanges:(BOOL)shouldFlush {
+    NSDictionary *changes = @{
+                              @"added" : [NSArray arrayWithArray:__added.array],
+                              @"modified":[NSArray arrayWithArray:__modified.array],
+                              @"deleted":[NSArray arrayWithArray:__deleted.array]
+                              };
+    if (shouldFlush) {
+        __added = [MTEThreadsafeArray new];
+        __modified = [MTEThreadsafeArray new];
+        __deleted = [MTEThreadsafeArray new];
+    }
+    
+    return changes;
+}
+
+
 - (BOOL)isGroup:(NSInteger)row {
     if (0 <= row) {
         return YES;
@@ -81,8 +138,8 @@
 }
 
 - (id)tableView:(NSTableView *)tableView
-    objectValueForTableColumn:(NSTableColumn *)tableColumn
-                          row:(NSInteger)row {
+objectValueForTableColumn:(NSTableColumn *)tableColumn
+            row:(NSInteger)row {
     if (0 == row) {
         WWChangesGroup *result = [WWChangesGroup new];
         result.string = NSLocalizedString(@"Added Files", @"Group header for list of added files");
@@ -97,7 +154,7 @@
     if (0 == row) {
         WWChangesGroup *result = [WWChangesGroup new];
         result.string =
-            NSLocalizedString(@"Modified Files", @"Group header for list of modified files");
+        NSLocalizedString(@"Modified Files", @"Group header for list of modified files");
         result.count = [self._modified count];
         return result;
     }
@@ -109,7 +166,7 @@
     if (0 == row) {
         WWChangesGroup *result = [WWChangesGroup new];
         result.string =
-            NSLocalizedString(@"Deleted Files", @"Group header for list of deleted files");
+        NSLocalizedString(@"Deleted Files", @"Group header for list of deleted files");
         result.count = [self._deleted count];
         return result;
     }

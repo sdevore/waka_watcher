@@ -8,9 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 @class MTEThreadsafeArray;
+@class WWChangesDataSource;
 
 @protocol WWChangesDataSourceProtocol <NSTableViewDataSource>
-
+-(void)changeDataSource:(nullable WWChangesDataSource *)source addedItems:(nonnull NSArray *)items atIndexes:(nonnull NSIndexSet *)indexSet;
+-(void)changeDataSource:(nullable WWChangesDataSource *)source deletedItems:(nonnull NSArray *)items atIndexes:(nonnull NSIndexSet *)indexSet;
+-(void)changeDataSource:(nullable WWChangesDataSource *)source modifiedItems:(nonnull NSArray *)items atIndexes:(nonnull NSIndexSet *)indexSet;
 @end
 
 @interface WWChangesGroup : NSObject <NSCopying>

@@ -46,4 +46,6 @@
 @property (nullable) MTEThreadsafeArray *children;
 @property (weak) id<WWDirectoryDataSourceProtocol> _Nullable delegate;
 - (nullable NSIndexSet *)addURLs:(nullable NSArray *)URLs withDelegate:(nullable id)delegate;
+- (void)setWatching:(NSInteger)state;
+- (NSInteger)watching;
 @end

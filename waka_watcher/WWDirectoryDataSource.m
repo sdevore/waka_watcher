@@ -30,6 +30,28 @@
     }
 }
 
+
+- (void)setWatching:(NSInteger)state {
+    NSArray *array = [self.children array];
+    for (WWDirectoryItem *item in array) {
+        item.shouldWatch = (NSOnState == state);
+    }
+}
+
+-(NSInteger)watching {
+    NSInteger result = NSOffState;
+    NSArray *children = [self.children array];
+    WWDirectoryItem *first = [children firstObject];
+    if (nil != first) {
+        result = first.shouldWatch;
+        for (WWDirectoryItem *item in children) {
+            if (item.shouldWatch != result) {
+                return NSMixedState;
+            }
+        }
+    }
+    return result;
+}
 - (NSIndexSet *)addURLs:(NSArray *)URLs withDelegate:(id)delegate {
     NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
     for (NSURL *url in URLs) {

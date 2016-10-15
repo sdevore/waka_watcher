@@ -15,6 +15,8 @@
 @end
 
 @implementation WWDirectoryDataSource
+
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -31,11 +33,12 @@
 }
 
 
-- (void)setWatching:(NSInteger)state {
+- (void)setWatching:(BOOL)state {
     NSArray *array = [self.children array];
     for (WWDirectoryItem *item in array) {
-        item.shouldWatch = (NSOnState == state);
+        item.watching = (NSOnState == state);
     }
+
 }
 
 -(NSInteger)watching {
@@ -43,15 +46,16 @@
     NSArray *children = [self.children array];
     WWDirectoryItem *first = [children firstObject];
     if (nil != first) {
-        result = first.shouldWatch;
+        result = first.watching;
         for (WWDirectoryItem *item in children) {
-            if (item.shouldWatch != result) {
+            if (item.watching != result) {
                 return NSMixedState;
             }
         }
     }
     return result;
 }
+
 - (NSIndexSet *)addURLs:(NSArray *)URLs withDelegate:(id)delegate {
     NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
     for (NSURL *url in URLs) {
@@ -60,7 +64,7 @@
         if (item.isDirectory) {
             NSURL *wakatimeProject;
             wakatimeProject = [item.url URLByAppendingPathComponent:@".wakatime-project"];
-            if ([wakatimeProject checkResourceIsReachableAndReturnError:&error] == NO) {
+            if (![wakatimeProject checkResourceIsReachableAndReturnError:&error]) {
                 // no default project defining file
             } else {
                 NSError *error = nil;

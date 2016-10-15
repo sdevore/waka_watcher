@@ -11,6 +11,8 @@
 @class WWChangesDataSource;
 
 @protocol WWChangesDataSourceProtocol <NSTableViewDataSource>
+
+@optional
 -(void)changeDataSource:(nullable WWChangesDataSource *)source addedItems:(nonnull NSArray *)items atIndexes:(nonnull NSIndexSet *)indexSet;
 -(void)changeDataSource:(nullable WWChangesDataSource *)source deletedItems:(nonnull NSArray *)items atIndexes:(nonnull NSIndexSet *)indexSet;
 -(void)changeDataSource:(nullable WWChangesDataSource *)source modifiedItems:(nonnull NSArray *)items atIndexes:(nonnull NSIndexSet *)indexSet;
@@ -32,5 +34,6 @@
 - (void)deletedItems:(nonnull NSArray *)deleted;
 
 - (nullable NSDictionary *)getChanges:(BOOL)shouldFlush;
+
 
 @end

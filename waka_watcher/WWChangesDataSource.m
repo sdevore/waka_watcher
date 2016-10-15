@@ -42,6 +42,11 @@
     return self;
 }
 
+-(id)changeAtIndex:(NSInteger)row {
+    
+    return nil;
+}
+
 -(void)addedItems:(NSArray *)added {
     NSMutableIndexSet *addedSet = [NSMutableIndexSet new];
     NSMutableArray *addedArray = [NSMutableArray new];

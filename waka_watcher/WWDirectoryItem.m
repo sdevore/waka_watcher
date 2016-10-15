@@ -13,6 +13,12 @@ NSString *const kAddDictionaryKey = @"add";
 NSString *const kModifiedDictionaryKey = @"modified";
 NSString *const kDeleteDictionaryKey = @"delete";
 
+@interface WWDirectoryItem ()
+@property(nullable) CDEvents *changeWatcher;
+
+@end
+
+
 @implementation WWDirectoryItem
 
 - (instancetype)initWithUrl:(NSURL *)url
@@ -26,15 +32,15 @@ NSString *const kDeleteDictionaryKey = @"delete";
             _parent = parent;
             NSNumber *isDirectory;
             NSError *error;
-            _shouldWatch = NO;
+            _watching = NO;
             BOOL success =
-                [url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:&error];
+                    [url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:&error];
             if (success && [isDirectory boolValue]) {
                 _isDirectory = YES;
             } else {
                 if (!success) {
                     NSLog(@"Error reading %@ isDirectory: %@", self.url,
-                          error.localizedDescription);
+                            error.localizedDescription);
                 }
                 _isDirectory = NO;
             }
@@ -94,7 +100,7 @@ NSString *const kDeleteDictionaryKey = @"delete";
 
 - (NSImage *)icon {
     if (nil != self.url) {
-        @synchronized(self) {
+        @synchronized (self) {
             if (_icon == nil) {
                 NSImage *fileIcon;
                 NSError *error;
@@ -127,25 +133,26 @@ NSString *const kDeleteDictionaryKey = @"delete";
     }
 }
 
-- (void)setShouldWatch:(BOOL)shouldWatch {
-    if (_shouldWatch == shouldWatch) {
+
+- (void)setWatching:(BOOL)shouldWatch {
+    if (_watching == shouldWatch) {
         return;
     }
-    _shouldWatch = shouldWatch;
+    _watching = shouldWatch;
     if (shouldWatch) {
         if (nil == self.changeWatcher) {
             __weak typeof(self) weakSelf = self;
-            
+
             self.changeWatcher = [[CDEvents alloc]
-                initWithURLs:[NSArray arrayWithObject:self.url]
-                       block:^(CDEvents *watcher, CDEvent *event) {
-                           DDLogInfo(@"[Block] URLWatcher: %@\nEvent: %@", watcher, event);
-                           if (nil != weakSelf) {
-                               [weakSelf updateChildren:NO async:NO];
-                           }
-                       }];
+                    initWithURLs:[NSArray arrayWithObject:self.url]
+                           block:^(CDEvents *watcher, CDEvent *event) {
+                               DDLogInfo(@"[Block] URLWatcher: %@\nEvent: %@", watcher, event);
+                               if (nil != weakSelf) {
+                                   [weakSelf updateChildren:NO async:NO];
+                               }
+                           }];
             DDLogInfo(@"-[CDEventsTestAppController run]:\n%@\n------\n%@", self.changeWatcher,
-                      [self.changeWatcher streamDescription]);
+                    [self.changeWatcher streamDescription]);
         }
     } else {
         self.changeWatcher = nil;
@@ -160,43 +167,42 @@ NSString *const kDeleteDictionaryKey = @"delete";
         return;
     }
     if (nil != self.delegate &&
-        [self.delegate respondsToSelector:@selector(directoryDataSource:shouldLoadItem:)]) {
+            [self.delegate respondsToSelector:@selector(directoryDataSource:shouldLoadItem:)]) {
         if (![self.delegate directoryDataSource:self.parent shouldLoadItem:self]) {
             return;
         }
     }
     self.isLoading = YES;
     if (nil != self.delegate &&
-        [self.delegate respondsToSelector:@selector(directoryDataSource:willLoadItem:)]) {
+            [self.delegate respondsToSelector:@selector(directoryDataSource:willLoadItem:)]) {
         [self.delegate directoryDataSource:self.parent willLoadItem:self];
     }
     NSError *error = nil;
-    NSArray *properties = [NSArray
-        arrayWithObjects:NSURLLocalizedNameKey, NSURLCreationDateKey,
-                         NSURLLocalizedTypeDescriptionKey, NSURLContentModificationDateKey,
-                         NSURLCustomIconKey, NSURLEffectiveIconKey, NSURLIsDirectoryKey, nil];
+    NSArray *properties = @[NSURLLocalizedNameKey, NSURLCreationDateKey,
+            NSURLLocalizedTypeDescriptionKey, NSURLContentModificationDateKey,
+            NSURLCustomIconKey, NSURLEffectiveIconKey, NSURLIsDirectoryKey];
 
     NSArray *array = [[NSFileManager defaultManager]
-          contentsOfDirectoryAtURL:self.url
-        includingPropertiesForKeys:properties
-                           options:(NSDirectoryEnumerationSkipsHiddenFiles)
-                             error:&error];
+            contentsOfDirectoryAtURL:self.url
+          includingPropertiesForKeys:properties
+                             options:(NSDirectoryEnumerationSkipsHiddenFiles)
+                               error:&error];
     if (array == nil) {
         // Handle the error
     }
     for (NSURL *url in array) {
         WWDirectoryItem *item =
-            [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
+                [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
         item.delegate = self.delegate;
         [self.children addObject:item];
         if (nil != self.delegate &&
-            [self.delegate
-                respondsToSelector:@selector(directoryDataSource:addedItems:atIndexes:)]) {
+                [self.delegate
+                        respondsToSelector:@selector(directoryDataSource:addedItems:atIndexes:)]) {
         }
         if (item.isDirectory && deep) {
             if (async) {
                 dispatch_queue_t queue =
-                    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
                 dispatch_async(queue, ^{
                     [item loadChildren:deep async:YES];
                 });
@@ -207,14 +213,14 @@ NSString *const kDeleteDictionaryKey = @"delete";
     }
     self.isLoading = NO;
     if (nil != self.delegate &&
-        [self.delegate respondsToSelector:@selector(directoryDataSource:didLoadItem:)]) {
+            [self.delegate respondsToSelector:@selector(directoryDataSource:didLoadItem:)]) {
         [self.delegate directoryDataSource:self.parent didLoadItem:self];
     }
     if (nil != self.delegate &&
-        [self respondsToSelector:@selector(directoryDataSource:addedItems:atIndexes:)]) {
+            [self.delegate respondsToSelector:@selector(directoryDataSource:addedItems:atIndexes:)]) {
         NSArray *children = [self.children array];
         NSIndexSet *indexSet =
-            [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, children.count - 1)];
+                [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, children.count - 1)];
         [self.delegate directoryDataSource:self addedItems:children atIndexes:indexSet];
     }
 }
@@ -225,29 +231,28 @@ NSString *const kDeleteDictionaryKey = @"delete";
     NSMutableArray *deletes = [NSMutableArray array];
     NSError *error;
     // find changed and new items in the directory
-    NSArray *properties = [NSArray
-        arrayWithObjects:NSURLLocalizedNameKey, NSURLCreationDateKey,
-                         NSURLLocalizedTypeDescriptionKey, NSURLContentModificationDateKey,
-                         NSURLCustomIconKey, NSURLEffectiveIconKey, NSURLIsDirectoryKey, nil];
+    NSArray *properties = @[NSURLLocalizedNameKey, NSURLCreationDateKey,
+            NSURLLocalizedTypeDescriptionKey, NSURLContentModificationDateKey,
+            NSURLCustomIconKey, NSURLEffectiveIconKey, NSURLIsDirectoryKey];
 
     NSArray *currentContents = [[NSFileManager defaultManager]
-          contentsOfDirectoryAtURL:self.url
-        includingPropertiesForKeys:properties
-                           options:(NSDirectoryEnumerationSkipsHiddenFiles)
-                             error:&error];
+            contentsOfDirectoryAtURL:self.url
+          includingPropertiesForKeys:properties
+                             options:(NSDirectoryEnumerationSkipsHiddenFiles)
+                               error:&error];
     NSArray *childrenArray = [self.children array];
     for (NSURL *url in currentContents) {
         BOOL isFound = false;
         BOOL isModfied = false;
-        for (WWDirectoryItem *item in childrenArray) {
-            if ([item.url isEqualTo:url]) {
-                isFound = true;
-                NSDate *fileDate;
+        NSDate *fileDate;
                 NSError *error;
-                ;
                 [self.url getResourceValue:&fileDate
                                     forKey:NSURLContentModificationDateKey
                                      error:&error];
+        for (WWDirectoryItem *item in childrenArray) {
+            if ([item.url isEqualTo:url]) {
+                isFound = true;
+                
                 if (!error) {
                     if (![fileDate isEqualToDate:item.modified]) {
                         isModfied = true;
@@ -258,12 +263,12 @@ NSString *const kDeleteDictionaryKey = @"delete";
                 if (deep && item.isDirectory) {
                     if (async) {
                         dispatch_queue_t queue =
-                            dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                                dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
                         dispatch_async(queue, ^{
-                            [item loadChildren:deep async:YES];
+                            [item updateChildren:deep async:YES];
                         });
                     } else {
-                        [item loadChildren:deep async:NO];
+                        [item updateChildren:deep async:NO];
                     }
                 }
                 break;
@@ -271,33 +276,42 @@ NSString *const kDeleteDictionaryKey = @"delete";
         }
         if (!isFound) {
             WWDirectoryItem *addItem =
-                [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
+                    [[WWDirectoryItem alloc] initWithUrl:url inParent:self withProject:self.project];
             [add addObject:addItem];
         }
     }
     if (nil != modified && 0 < modified.count) {
-        if (nil != self.delegate &&
-            [self.delegate
-                respondsToSelector:@selector(directoryDataSource:modifiedItems:atIndexes:)]) {
-            childrenArray = [self.children array];
-            NSMutableIndexSet *modifiedSet = [NSMutableIndexSet new];
-            for (WWDirectoryItem *modifiedItem in modified) {
-                [modifiedSet addIndex:[childrenArray indexOfObject:modifiedItem]];
+        if (nil != self.delegate) {
+            if ([self.delegate
+                    respondsToSelector:@selector(directoryDataSource:modifiedItems:atIndexes:)]) {
+                childrenArray = [self.children array];
+                NSMutableIndexSet *modifiedSet = [NSMutableIndexSet new];
+                for (WWDirectoryItem *modifiedItem in modified) {
+                    [modifiedSet addIndex:[childrenArray indexOfObject:modifiedItem]];
+                }
+                [self.delegate directoryDataSource:self modifiedItems:modified atIndexes:modifiedSet];
             }
-            [self.delegate directoryDataSource:self modifiedItems:modified atIndexes:modifiedSet];
+            if ([self.delegate respondsToSelector:@selector(updatedDirectoryItem:modifiedChildren:)]) {
+                [self.delegate updatedDirectoryItem:self modifiedChildren:modified];
+            }
         }
     }
     if (nil != add && 0 < add.count) {
         [self.children addObjects:add];
-        if (nil != self.delegate &&
-            [self.delegate
-                respondsToSelector:@selector(directoryDataSource:addedItems:atIndexes:)]) {
-            childrenArray = [self.children array];
-            NSMutableIndexSet *addSet = [NSMutableIndexSet new];
-            for (WWDirectoryItem *addItem in add) {
-                [addSet addIndex:[childrenArray indexOfObject:addItem]];
+        if (nil != self.delegate) {
+            if ([self.delegate
+                    respondsToSelector:@selector(directoryDataSource:addedItems:atIndexes:)]) {
+                childrenArray = [self.children array];
+                NSMutableIndexSet *addSet = [NSMutableIndexSet new];
+                for (WWDirectoryItem *addItem in add) {
+                    [addSet addIndex:[childrenArray indexOfObject:addItem]];
+                }
+                [self.delegate directoryDataSource:self addedItems:add atIndexes:addSet];
             }
-            [self.delegate directoryDataSource:self addedItems:add atIndexes:addSet];
+
+            if ([self.delegate respondsToSelector:@selector(updatedDirectoryItem:addedChildren:)]) {
+                [self.delegate updatedDirectoryItem:self addedChildren:add];
+            }
         }
     }
 
@@ -316,7 +330,7 @@ NSString *const kDeleteDictionaryKey = @"delete";
         for (WWDirectoryItem *deletedItem in deletes) {
             NSArray *children = [self.children array];
             for (NSInteger ii = children.count - 1; ii >= 0; ii--) {
-                WWDirectoryItem *item = [children objectAtIndex:ii];
+                WWDirectoryItem *item = children[ii];
                 if ([[item.path lastPathComponent]
                         isEqualToString:[deletedItem.path lastPathComponent]]) {
                     [self.children removeObject:item];
@@ -324,10 +338,14 @@ NSString *const kDeleteDictionaryKey = @"delete";
                 }
             }
         }
-        if ([deletedIndexSet count] > 0 && nil != self.delegate &&
-            [self.delegate
-                respondsToSelector:@selector(directoryDataSource:removedItems:atIndexes:)]) {
-            [self.delegate directoryDataSource:self removedItems:deletes atIndexes:deletedIndexSet];
+        if ([deletedIndexSet count] > 0 && nil != self.delegate) {
+            if ([self.delegate
+                    respondsToSelector:@selector(directoryDataSource:removedItems:atIndexes:)]) {
+                [self.delegate directoryDataSource:self removedItems:deletes atIndexes:deletedIndexSet];
+            }
+            if ([self.delegate respondsToSelector:@selector(updatedDirectoryItem:deletedChildren:)]) {
+                [self.delegate updatedDirectoryItem:self deletedChildren:deletes];
+            }
         }
     }
 }

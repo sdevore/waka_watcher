@@ -40,12 +40,21 @@
                 didLoadItem:(nullable WWDirectoryItem *)item;
 
 #pragma mark - updating contents
+
+- (void)updatedDirectoryItem:(nullable WWDirectoryItem *)item addedChildren:(nonnull NSArray *)children;
+
+- (void)updatedDirectoryItem:(nullable WWDirectoryItem *)item modifiedChildren:(nonnull NSArray *)children;
+
+- (void)updatedDirectoryItem:(nullable WWDirectoryItem *)item deletedChildren:(nonnull NSArray *)children;
 @end
 
 @interface WWDirectoryDataSource : NSObject <NSOutlineViewDataSource>
 @property (nullable) MTEThreadsafeArray *children;
 @property (weak) id<WWDirectoryDataSourceProtocol> _Nullable delegate;
+
+
 - (nullable NSIndexSet *)addURLs:(nullable NSArray *)URLs withDelegate:(nullable id)delegate;
-- (void)setWatching:(NSInteger)state;
+
+- (void)setWatching:(BOOL)shouldWatch;
 - (NSInteger)watching;
 @end

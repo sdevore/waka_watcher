@@ -135,7 +135,7 @@
     set = [ds addURLs:urls withDelegate:nil];
     assertThatInteger(ds.watching, equalToInteger(NSOffState));
     [ds setWatching:NSOnState];
-    NSInteger result = ds.watching;
+
     assertThatInteger(ds.watching, equalToInteger(NSOnState));
     WWDirectoryItem *item = [ds outlineView:[NSOutlineView new] child:0 ofItem:nil];
     assertThat(item, notNilValue());

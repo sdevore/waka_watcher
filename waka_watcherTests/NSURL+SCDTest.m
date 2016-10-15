@@ -18,8 +18,6 @@
 
 @implementation NSURL_SCDTest{
     NSURL *_folder;
-    
-
 }
 
 

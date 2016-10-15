@@ -182,6 +182,7 @@
 - (void)testUpdate_delegatesCalled {
     id<WWDirectoryDataSourceProtocol> delegate =
         mockProtocol(@protocol(WWDirectoryDataSourceProtocol));
+    [given([delegate directoryDataSource:anything() shouldLoadItem:anything()]) willReturnBool:YES];
     _testItem.delegate = delegate;
     [_testItem loadChildren:YES async:NO];
     NSURL *newURL = [self createFile:@"new.txt" withContent:nil insideDirectory:_testFolder];
@@ -190,8 +191,26 @@
     [verifyCount(delegate, atLeastOnce()) directoryDataSource:anything()
                                                    addedItems:anything()
                                                     atIndexes:anything()];
-
+    [verifyCount(delegate, atLeastOnce()) updatedDirectoryItem:anything() addedChildren:anything()];
+    NSDate *oldDate;
+    NSDate *newDate = [NSDate dateWithTimeIntervalSinceNow:1000];
+    NSDate *afterDate;
+    NSError *err;
+    [newURL getResourceValue:&oldDate forKey:NSURLContentModificationDateKey error:&err];
+    [newURL setResourceValue:newDate forKey:NSURLContentModificationDateKey error:&err];
+    [newURL getResourceValue:&afterDate forKey:NSURLContentModificationDateKey error:&err];
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    [_testItem updateChildren:YES async:NO];
+    
+    [verifyCount(delegate, atLeastOnce()) directoryDataSource:anything()
+                                                   modifiedItems:anything()
+                                                    atIndexes:anything()];
+    [verifyCount(delegate, atLeastOnce()) updatedDirectoryItem:anything() modifiedChildren:anything()];
+
+   
+    
+    
     if ([fileManager fileExistsAtPath:newURL.path]) {
         [fileManager removeItemAtPath:newURL.path error:nil];
     }
@@ -199,12 +218,13 @@
     [verifyCount(delegate, atLeastOnce()) directoryDataSource:anything()
                                                  removedItems:anything()
                                                     atIndexes:anything()];
+    [verifyCount(delegate, atLeastOnce()) updatedDirectoryItem:anything() deletedChildren:anything()];
 }
 
 - (void)testShouldWatch_updateDelegatesCalled {
     
     _testItem.delegate = self;
-    _testItem.shouldWatch = YES;
+    _testItem.watching = YES;
     [_testItem loadChildren:YES async:NO];
     NSURL *newURL = [self createFile:@"new.txt" withContent:nil insideDirectory:_testFolder];
     
@@ -217,7 +237,10 @@
     }
     
     assertWithTimeout(5, thatEventually(_deleted), notNilValue());
-    assertWithTimeout(5, thatEventually([NSNumber numberWithInteger:_deleted.count]), equalToInteger(1));}
+    assertWithTimeout(5, thatEventually([NSNumber numberWithInteger:_deleted.count]), equalToInteger(1));
+}
+
+
 
 #pragma mark - performance section
 

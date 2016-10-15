@@ -17,6 +17,8 @@
 #ifdef DEBUG
 static  DDLogLevel ddLogLevel = DDLogLevelVerbose;
 #else
-static  DDLogLevel ddLogLevel = DDLogLevelWarn;
+static  DDLogLevel ddLogLevel = DDLogLevelWarning;
 #endif
 #endif /* waka_watcher_pch */
+
+

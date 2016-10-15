@@ -668,11 +668,84 @@
             <objects>
                 <windowController id="B8D-0N-5wS" userLabel="Main Window" sceneMemberID="viewController">
                     <window key="window" title="Waka Watching" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
                         <rect key="contentRect" x="101" y="530" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
                         <value key="minSize" type="size" width="480" height="270"/>
+                        <toolbar key="toolbar" implicitIdentifier="85D5ECE1-A662-4560-BC4A-1DCC2C72C1F4" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="6It-uX-bSN">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Xug-1z-atW"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Hwd-A2-dF9"/>
+                                <toolbarItem implicitItemIdentifier="C53B9C81-60FE-4985-ABC3-0440408C4F42" label="Add Folder" paletteLabel="Add Folder" image="NSAddTemplate" id="aLA-2Z-1w8">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="18" height="25"/>
+                                    <size key="maxSize" width="127" height="25"/>
+                                    <button key="view" verticalHuggingPriority="750" id="G8w-MN-lTF">
+                                        <rect key="frame" x="15" y="14" width="35" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="epM-KK-Hhs">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="addDirectory:" target="Oky-zY-oP4" id="uF1-ZG-gJj"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="AB61E7B3-6CB9-4DEE-8163-FF31B3A811B7" label="Remove Folder" paletteLabel="Remove Folder" image="NSRemoveTemplate" id="3oD-ki-qbQ">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="33" height="25"/>
+                                    <size key="maxSize" width="127" height="25"/>
+                                    <button key="view" verticalHuggingPriority="750" id="fSJ-gZ-dTf">
+                                        <rect key="frame" x="26" y="14" width="33" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRemoveTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zYz-ar-hqh">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="removeSelectedDirectory:" target="Oky-zY-oP4" id="CGM-vB-9kC"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="D5EEBA9B-E3A2-41ED-8A98-98FE9088202B" label="Watching" paletteLabel="Watching" image="NSShareTemplate" id="Oev-ef-8vy">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="41" height="25"/>
+                                    <size key="maxSize" width="127" height="25"/>
+                                    <button key="view" verticalHuggingPriority="750" id="htk-z6-sCY">
+                                        <rect key="frame" x="7" y="14" width="43" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSImageNameStopProgressTemplate" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SvK-VJ-nHu">
+                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="watching:" target="Oky-zY-oP4" id="3sF-zr-ikY"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="1B348D46-1F4F-460E-A58B-B003008B8BD0" label="Custom View" paletteLabel="Custom View" image="D1BD5DD2-AC62-48CF-8476-4A6F56BCF546" id="SaJ-GT-p7N">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="61" height="18"/>
+                                    <size key="maxSize" width="61" height="18"/>
+                                    <button key="view" id="hTN-SS-fWe">
+                                        <rect key="frame" x="8" y="14" width="61" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="bevel" title="Check" bezelStyle="regularSquare" image="D1BD5DD2-AC62-48CF-8476-4A6F56BCF546" imagePosition="left" state="on" inset="2" id="6zL-JE-E5Z">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="aLA-2Z-1w8"/>
+                                <toolbarItem reference="3oD-ki-qbQ"/>
+                                <toolbarItem reference="Hwd-A2-dF9"/>
+                                <toolbarItem reference="Oev-ef-8vy"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                     </window>
                     <connections>
                         <segue destination="izj-uY-L9N" kind="relationship" relationship="window.shadowedContentViewController" id="h42-69-qr7"/>
@@ -697,44 +770,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="757" height="233"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="6HS-qA-M8C">
-                                                <rect key="frame" x="14" y="185" width="65" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nqy-Mf-4a3">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="addDirectory:" target="izj-uY-L9N" id="xaR-9w-XpK"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J7o-Gb-wmO">
-                                                <rect key="frame" x="79" y="185" width="89" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="15j-7B-rrR">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="removeSelectedDirectory:" target="izj-uY-L9N" id="FVv-QD-1aC"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CJX-TX-0Al">
-                                                <rect key="frame" x="483" y="185" width="131" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Start Watching" alternateTitle="Stop Watching" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ya3-9s-3be">
-                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="watching:" target="izj-uY-L9N" id="3uL-9Y-tta"/>
-                                                </connections>
-                                            </button>
                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="34" horizontalPageScroll="10" verticalLineScroll="34" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fs-n2-3oD">
-                                                <rect key="frame" x="0.0" y="0.0" width="757" height="172"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="757" height="233"/>
                                                 <clipView key="contentView" id="01Q-SV-2Du">
-                                                    <rect key="frame" x="1" y="0.0" width="755" height="171"/>
+                                                    <rect key="frame" x="1" y="0.0" width="755" height="232"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="32" headerView="6Ci-1Z-0cK" viewBased="YES" indentationPerLevel="16" outlineTableColumn="9hc-PA-6iD" id="eqs-OY-LQ8">
-                                                            <rect key="frame" x="0.0" y="0.0" width="755" height="148"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="755" height="209"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -918,34 +961,12 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableHeaderView>
                                             </scrollView>
-                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="nOj-ff-ffo">
-                                                <rect key="frame" x="614" y="194" width="125" height="18"/>
-                                                <buttonCell key="cell" type="check" title="Watch by default" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Gtn-vr-7aa">
-                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="watchingDefault:" target="izj-uY-L9N" id="Jcb-yo-tEA"/>
-                                                    <binding destination="mss-i9-daL" name="value" keyPath="values.watchByDefault" id="1AT-Hl-uDD"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="nOj-ff-ffo" firstAttribute="centerY" secondItem="J7o-Gb-wmO" secondAttribute="centerY" id="294-Eo-ogi"/>
                                             <constraint firstAttribute="bottom" secondItem="3fs-n2-3oD" secondAttribute="bottom" id="2hR-mx-s3b"/>
                                             <constraint firstItem="3fs-n2-3oD" firstAttribute="leading" secondItem="Pcz-e7-vHg" secondAttribute="leading" id="5em-Mr-p9y"/>
-                                            <constraint firstItem="CJX-TX-0Al" firstAttribute="centerY" secondItem="J7o-Gb-wmO" secondAttribute="centerY" id="Ags-Eh-XH6"/>
-                                            <constraint firstItem="6HS-qA-M8C" firstAttribute="leading" secondItem="Pcz-e7-vHg" secondAttribute="leading" constant="20" symbolic="YES" id="HTR-Cd-zMB"/>
-                                            <constraint firstItem="nOj-ff-ffo" firstAttribute="leading" secondItem="CJX-TX-0Al" secondAttribute="trailing" constant="8" symbolic="YES" id="KIp-bn-lY7"/>
-                                            <constraint firstItem="6HS-qA-M8C" firstAttribute="top" secondItem="Pcz-e7-vHg" secondAttribute="top" constant="20" symbolic="YES" id="StF-TY-cTI"/>
-                                            <constraint firstItem="J7o-Gb-wmO" firstAttribute="leading" secondItem="6HS-qA-M8C" secondAttribute="trailing" constant="12" symbolic="YES" id="VA0-9D-r1L"/>
-                                            <constraint firstItem="nOj-ff-ffo" firstAttribute="leading" secondItem="CJX-TX-0Al" secondAttribute="trailing" constant="8" symbolic="YES" id="VSw-1v-UJ0"/>
-                                            <constraint firstItem="3fs-n2-3oD" firstAttribute="top" secondItem="6HS-qA-M8C" secondAttribute="bottom" constant="20" symbolic="YES" id="YjF-ca-GTx"/>
-                                            <constraint firstItem="J7o-Gb-wmO" firstAttribute="centerY" secondItem="6HS-qA-M8C" secondAttribute="centerY" id="hxd-XN-1tP"/>
                                             <constraint firstAttribute="trailing" secondItem="3fs-n2-3oD" secondAttribute="trailing" id="iZq-tk-KpB"/>
-                                            <constraint firstAttribute="trailing" secondItem="nOj-ff-ffo" secondAttribute="trailing" constant="20" symbolic="YES" id="l25-dp-VkB"/>
-                                            <constraint firstItem="J7o-Gb-wmO" firstAttribute="leading" secondItem="6HS-qA-M8C" secondAttribute="trailing" constant="12" symbolic="YES" id="qcb-1H-vgZ"/>
-                                            <constraint firstAttribute="trailing" secondItem="nOj-ff-ffo" secondAttribute="trailing" constant="20" symbolic="YES" id="zEa-ge-qn3"/>
+                                            <constraint firstItem="3fs-n2-3oD" firstAttribute="top" secondItem="Pcz-e7-vHg" secondAttribute="top" id="juX-QG-k80"/>
                                         </constraints>
                                     </customView>
                                     <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="T7u-5z-gQ6">
@@ -1047,11 +1068,13 @@
                             <constraint firstAttribute="trailing" secondItem="hHM-wh-E6o" secondAttribute="trailing" id="oXh-LN-TaB"/>
                             <constraint firstItem="hHM-wh-E6o" firstAttribute="leading" secondItem="rjY-Fr-Q7y" secondAttribute="leading" id="zEJ-fv-dji"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="allowsVibrancy" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="directoryView" destination="eqs-OY-LQ8" id="LfA-Jg-HOH"/>
                         <outlet property="recentChangesView" destination="IMK-dE-bB3" id="ykT-Rx-Kso"/>
-                        <outlet property="watchingButton" destination="CJX-TX-0Al" id="b06-fs-Bhd"/>
                     </connections>
                 </viewController>
                 <customObject id="tf9-04-loZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1061,6 +1084,29 @@
         </scene>
     </scenes>
     <resources>
+        <image name="D1BD5DD2-AC62-48CF-8476-4A6F56BCF546" width="18" height="18">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGW1xYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QFwcI
+ERYbHCc0NTY3ODk6O0JDRElMT1VYVSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNS
+ZXBzV05TQ29sb3KAFhIAwwAAgAKAFNISCRMVWk5TLm9iamVjdHOhFIADgBPSEgkXGqIYGYAEgAWAEhAA
+1h0eHwkgISIbIyQlJlZOU1NpemVfEA9OU0JpdHNQZXJTYW1wbGVfEBBOU0NvbG9yU3BhY2VOYW1lWk5T
+SGFzQWxwaGFfEBROU0NvcmVVSUltYWdlT3B0aW9uc4APgBCAEQmABtMoEgkpLjNXTlMua2V5c6QqKywt
+gAeACIAJgAqkLxgxMoALgASADIANgA5Uc2l6ZVV2YWx1ZVVzdGF0ZVZ3aWRnZXRXcmVndWxhclZub3Jt
+YWxYY2hlY2tib3jSPD0+P1okY2xhc3NuYW1lWCRjbGFzc2VzXxATTlNNdXRhYmxlRGljdGlvbmFyeaM+
+QEFcTlNEaWN0aW9uYXJ5WE5TT2JqZWN0WHsxOCwgMTh9XxAZTlNDYWxpYnJhdGVkUkdCQ29sb3JTcGFj
+ZdI8PUVGXxAQTlNDb3JlVUlJbWFnZVJlcKNHSEFfEBBOU0NvcmVVSUltYWdlUmVwWk5TSW1hZ2VSZXDS
+PD1KS1dOU0FycmF5okpB0jw9TU5eTlNNdXRhYmxlQXJyYXmjTUpB01BRCVJTVFdOU1doaXRlXE5TQ29s
+b3JTcGFjZUQwIDAAEAOAFdI8PVZXV05TQ29sb3KiVkHSPD1ZWldOU0ltYWdlollBXxAPTlNLZXllZEFy
+Y2hpdmVy0V1eVHJvb3SAAQAIABEAGgAjAC0AMgA3AFEAVwBgAGcAdAB7AIMAhQCKAIwAjgCTAJ4AoACi
+AKQAqQCsAK4AsACyALQAwQDIANoA7QD4AQ8BEQETARUBFgEYAR8BJwEsAS4BMAEyATQBOQE7AT0BPwFB
+AUMBSAFOAVQBWwFjAWoBcwF4AYMBjAGiAaYBswG8AcUB4QHmAfkB/QIQAhsCIAIoAisCMAI/AkMCSgJS
+Al8CZAJmAmgCbQJ1AngCfQKFAogCmgKdAqIAAAAAAAACAQAAAAAAAABfAAAAAAAAAAAAAAAAAAACpA
+</mutableData>
+        </image>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSImageNameStopProgressTemplate" width="128" height="128"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="NSShareTemplate" width="11" height="16"/>
     </resources>
 </document>

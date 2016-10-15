@@ -27,7 +27,7 @@ NSString *const kFileViewColumn = @"fileViewColumn";
 
 - (IBAction)watchForChanges:(id)sender {
     if (nil != self.fileItem && nil != sender && [sender isKindOfClass:[NSButton class]]) {
-        self.fileItem.shouldWatch = [(NSButton *)sender state] == NSOnState;
+        [self.fileItem setWatching: [(NSButton *)sender state] == NSOnState];
     }
 }
 @end

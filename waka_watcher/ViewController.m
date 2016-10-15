@@ -10,15 +10,14 @@
 #import "ModifiedView.h"
 #import "ProjectView.h"
 #import "ViewController.h"
-#import "WWChangesDataSource.h"
 #import "WWChangesHeaderView.h"
-#import "WWDirectoryDataSource.h"
 #import "WWDirectoryItem.h"
+
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     // Do any additional setup after loading the view.
     self.outlineDatasource = [WWDirectoryDataSource new];
     self.changesDatasource = [WWChangesDataSource new];
@@ -26,11 +25,19 @@
     [self.directoryView setDataSource:self.outlineDatasource];
     [self.recentChangesView setDelegate:self];
     [self.recentChangesView setDataSource:self.changesDatasource];
+    
+}
+
+-(void)viewWillAppear {
+    [super viewWillAppear];
+    self.view.window.titleVisibility = NSWindowTitleHidden;
+    self.view.window.styleMask |= NSFullSizeContentViewWindowMask;
+    self.view.window.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantLight];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
-
+    
     // Update the view, if already loaded.
 }
 
@@ -43,14 +50,14 @@
     panel.title = NSLocalizedString(@"Select directories to monitor",
                                     @"select directories to monitor window title");
     panel.message =
-        NSLocalizedString(@"Select the directories that you are planning to monitor and submit to "
-                          @"WakaTime for tracking your time.  These directories will be monitored "
-                          @"for file changes.  You can specify projects later.",
-                          @"select directories message");
+    NSLocalizedString(@"Select the directories that you are planning to monitor and submit to "
+                      @"WakaTime for tracking your time.  These directories will be monitored "
+                      @"for file changes.  You can specify projects later.",
+                      @"select directories message");
     [panel beginWithCompletionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             dispatch_queue_t myQueue =
-                dispatch_queue_create("com.scidsolutions.wakawatcher.url_loader", NULL);
+            dispatch_queue_create("com.scidsolutions.wakawatcher.url_loader", NULL);
             dispatch_async(myQueue, ^{
                 // Perform long running process
                 NSArray *URLs = [NSArray arrayWithArray:panel.URLs];
@@ -61,10 +68,10 @@
                                                     inParent:nil
                                                withAnimation:YES];
                 });
-
+                
             });
         }
-
+        
     }];
 }
 
@@ -72,8 +79,12 @@
 }
 
 - (IBAction)watching:(id)sender {
-    if (self.outlineDatasource != nil) {
+    if ([sender isKindOfClass:[NSButton class]] && [(NSButton *)sender state] != NSOnState) {
         [self.outlineDatasource setWatching:YES];
+        [(NSButton *)sender setState:NSOnState];
+    }  else {
+        [self.outlineDatasource setWatching:NO];
+        [(NSButton *)sender setState:NSOffState];
     }
 }
 
@@ -97,16 +108,16 @@
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
-   
+    
     if ([self tableView:tableView isGroupRow:row]) {
         NSTextField *textField = [tableView makeViewWithIdentifier:@"TextCell" owner:self];
-
+        
         WWChangesGroup *item = [self.changesDatasource tableView:tableView
                                        objectValueForTableColumn:tableColumn
                                                              row:row];
         [textField setStringValue:item.string];
         return textField;
-
+        
     } else {
     }
     return nil;
@@ -173,4 +184,48 @@
     [self.recentChangesView reloadData];
 }
 
+
+#pragma mark changes datasource delegate methods
+
+-(void)changeDataSource:(WWChangesDataSource *)source addedItems:(NSArray *)items atIndexes:(NSIndexSet *)indexSet {
+    if ([NSThread isMainThread]) {
+        [self.recentChangesView reloadData];
+    }
+    else {
+        __weak typeof(self) weakSelf = self;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.recentChangesView reloadData];
+        });
+    }
+}
+
+
+
+
+- (void)changeDataSource:(WWChangesDataSource *)source modifiedItems:(NSArray *)items atIndexes:(NSIndexSet *)indexSet {
+    if ([NSThread isMainThread]) {
+        [self.recentChangesView reloadData];
+    }
+    else {
+        __weak typeof(self) weakSelf = self;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.recentChangesView reloadData];
+        });
+    }
+}
+
+-(void)changeDataSource:(WWChangesDataSource *)source deletedItems:(NSArray *)items atIndexes:(NSIndexSet *)indexSet {
+    if ([NSThread isMainThread]) {
+        [self.recentChangesView reloadData];
+    }
+    else {
+        __weak typeof(self) weakSelf = self;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.recentChangesView reloadData];
+        });
+    }
+}
 @end

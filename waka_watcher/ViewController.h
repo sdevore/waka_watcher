@@ -7,12 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "WWChangesDataSource.h"
+#import "WWDirectoryDataSource.h"
 
-@class WWDirectoryDataSource;
-@class WWChangesDataSource;
-@class WWDirectoryItemProtocol;
-
-@interface ViewController : NSViewController <WWDirectoryDataSourceProtocol, NSOutlineViewDelegate, NSTableViewDelegate>
+@interface ViewController : NSViewController <WWDirectoryDataSourceProtocol, NSOutlineViewDelegate, NSTableViewDelegate, WWChangesDataSourceProtocol>
 @property (nullable, weak) IBOutlet NSButton *watchingButton;
 @property (nullable, weak) IBOutlet NSTableView *recentChangesView;
 @property (nullable, weak) IBOutlet NSOutlineView *directoryView;

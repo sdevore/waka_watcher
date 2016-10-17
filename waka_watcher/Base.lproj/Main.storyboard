@@ -673,77 +673,47 @@
                         <rect key="contentRect" x="101" y="530" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
                         <value key="minSize" type="size" width="480" height="270"/>
-                        <toolbar key="toolbar" implicitIdentifier="85D5ECE1-A662-4560-BC4A-1DCC2C72C1F4" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="6It-uX-bSN">
+                        <toolbar key="toolbar" implicitIdentifier="85D5ECE1-A662-4560-BC4A-1DCC2C72C1F4" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="6It-uX-bSN">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Xug-1z-atW"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Hwd-A2-dF9"/>
-                                <toolbarItem implicitItemIdentifier="C53B9C81-60FE-4985-ABC3-0440408C4F42" label="Add Folder" paletteLabel="Add Folder" image="NSAddTemplate" id="aLA-2Z-1w8">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="18" height="25"/>
-                                    <size key="maxSize" width="127" height="25"/>
-                                    <button key="view" verticalHuggingPriority="750" id="G8w-MN-lTF">
-                                        <rect key="frame" x="15" y="14" width="35" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="epM-KK-Hhs">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                    </button>
-                                    <connections>
-                                        <action selector="addDirectory:" target="Oky-zY-oP4" id="uF1-ZG-gJj"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="AB61E7B3-6CB9-4DEE-8163-FF31B3A811B7" label="Remove Folder" paletteLabel="Remove Folder" image="NSRemoveTemplate" id="3oD-ki-qbQ">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="33" height="25"/>
-                                    <size key="maxSize" width="127" height="25"/>
-                                    <button key="view" verticalHuggingPriority="750" id="fSJ-gZ-dTf">
-                                        <rect key="frame" x="26" y="14" width="33" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRemoveTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zYz-ar-hqh">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                    </button>
-                                    <connections>
-                                        <action selector="removeSelectedDirectory:" target="Oky-zY-oP4" id="CGM-vB-9kC"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="D5EEBA9B-E3A2-41ED-8A98-98FE9088202B" label="Watching" paletteLabel="Watching" image="NSShareTemplate" id="Oev-ef-8vy">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="41" height="25"/>
-                                    <size key="maxSize" width="127" height="25"/>
-                                    <button key="view" verticalHuggingPriority="750" id="htk-z6-sCY">
-                                        <rect key="frame" x="7" y="14" width="43" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSImageNameStopProgressTemplate" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SvK-VJ-nHu">
-                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                    </button>
-                                    <connections>
-                                        <action selector="watching:" target="Oky-zY-oP4" id="3sF-zr-ikY"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="1B348D46-1F4F-460E-A58B-B003008B8BD0" label="Custom View" paletteLabel="Custom View" image="D1BD5DD2-AC62-48CF-8476-4A6F56BCF546" id="SaJ-GT-p7N">
+                                <toolbarItem implicitItemIdentifier="1B348D46-1F4F-460E-A58B-B003008B8BD0" label="Watch Always" paletteLabel="Watch by Default" image="On-Switch_30" id="SaJ-GT-p7N">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="61" height="18"/>
                                     <size key="maxSize" width="61" height="18"/>
                                     <button key="view" id="hTN-SS-fWe">
-                                        <rect key="frame" x="8" y="14" width="61" height="18"/>
+                                        <rect key="frame" x="18" y="14" width="61" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="bevel" title="Check" bezelStyle="regularSquare" image="D1BD5DD2-AC62-48CF-8476-4A6F56BCF546" imagePosition="left" state="on" inset="2" id="6zL-JE-E5Z">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="On-Switch_30" imagePosition="left" alternateImage="Off-Switch_30" state="on" inset="2" id="6zL-JE-E5Z">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
+                                    <connections>
+                                        <action selector="watchingDefault:" target="Oky-zY-oP4" id="aqY-dQ-zkj"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="634AE006-C942-4A7E-9F8E-39F2B608FF42" label="Add Folder" paletteLabel="Add Folder" tag="-1" image="Add_32" id="bae-mY-23A">
+                                    <connections>
+                                        <action selector="addDirectory:" target="Oky-zY-oP4" id="Z1J-N4-msi"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="F69CB6E0-F7FF-486C-A2E5-FBB38F6C3296" label="Remove Folder" paletteLabel="Remove Folder" tag="-1" image="Remove_32" id="ESR-qf-IB5">
+                                    <connections>
+                                        <action selector="removeSelectedDirectory:" target="Oky-zY-oP4" id="oHQ-Bu-oQh"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="9B8BF034-23EC-4A5F-926D-6487B6F5F0B7" label="Watch" paletteLabel="Watch" tag="-1" image="Loading_32" id="6wg-Xu-1wi">
+                                    <connections>
+                                        <action selector="watching:" target="Oky-zY-oP4" id="Lz5-kG-S9r"/>
+                                    </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="aLA-2Z-1w8"/>
-                                <toolbarItem reference="3oD-ki-qbQ"/>
+                                <toolbarItem reference="bae-mY-23A"/>
+                                <toolbarItem reference="ESR-qf-IB5"/>
                                 <toolbarItem reference="Hwd-A2-dF9"/>
-                                <toolbarItem reference="Oev-ef-8vy"/>
+                                <toolbarItem reference="6wg-Xu-1wi"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
@@ -753,7 +723,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="17" y="240"/>
+            <point key="canvasLocation" x="311" y="203"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="5FQ-Ac-Dq2">
@@ -983,7 +953,7 @@
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn identifier="MainColumn" width="751.73046875" minWidth="40" maxWidth="1000" id="qdw-Y7-GUH">
+                                                        <tableColumn identifier="MainColumn" width="752.23046875" minWidth="40" maxWidth="1000" id="qdw-Y7-GUH">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1084,29 +1054,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="D1BD5DD2-AC62-48CF-8476-4A6F56BCF546" width="18" height="18">
-            <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGW1xYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QFwcI
-ERYbHCc0NTY3ODk6O0JDRElMT1VYVSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNS
-ZXBzV05TQ29sb3KAFhIAwwAAgAKAFNISCRMVWk5TLm9iamVjdHOhFIADgBPSEgkXGqIYGYAEgAWAEhAA
-1h0eHwkgISIbIyQlJlZOU1NpemVfEA9OU0JpdHNQZXJTYW1wbGVfEBBOU0NvbG9yU3BhY2VOYW1lWk5T
-SGFzQWxwaGFfEBROU0NvcmVVSUltYWdlT3B0aW9uc4APgBCAEQmABtMoEgkpLjNXTlMua2V5c6QqKywt
-gAeACIAJgAqkLxgxMoALgASADIANgA5Uc2l6ZVV2YWx1ZVVzdGF0ZVZ3aWRnZXRXcmVndWxhclZub3Jt
-YWxYY2hlY2tib3jSPD0+P1okY2xhc3NuYW1lWCRjbGFzc2VzXxATTlNNdXRhYmxlRGljdGlvbmFyeaM+
-QEFcTlNEaWN0aW9uYXJ5WE5TT2JqZWN0WHsxOCwgMTh9XxAZTlNDYWxpYnJhdGVkUkdCQ29sb3JTcGFj
-ZdI8PUVGXxAQTlNDb3JlVUlJbWFnZVJlcKNHSEFfEBBOU0NvcmVVSUltYWdlUmVwWk5TSW1hZ2VSZXDS
-PD1KS1dOU0FycmF5okpB0jw9TU5eTlNNdXRhYmxlQXJyYXmjTUpB01BRCVJTVFdOU1doaXRlXE5TQ29s
-b3JTcGFjZUQwIDAAEAOAFdI8PVZXV05TQ29sb3KiVkHSPD1ZWldOU0ltYWdlollBXxAPTlNLZXllZEFy
-Y2hpdmVy0V1eVHJvb3SAAQAIABEAGgAjAC0AMgA3AFEAVwBgAGcAdAB7AIMAhQCKAIwAjgCTAJ4AoACi
-AKQAqQCsAK4AsACyALQAwQDIANoA7QD4AQ8BEQETARUBFgEYAR8BJwEsAS4BMAEyATQBOQE7AT0BPwFB
-AUMBSAFOAVQBWwFjAWoBcwF4AYMBjAGiAaYBswG8AcUB4QHmAfkB/QIQAhsCIAIoAisCMAI/AkMCSgJS
-Al8CZAJmAmgCbQJ1AngCfQKFAogCmgKdAqIAAAAAAAACAQAAAAAAAABfAAAAAAAAAAAAAAAAAAACpA
-</mutableData>
-        </image>
+        <image name="Add_32" width="32" height="32"/>
+        <image name="Loading_32" width="32" height="32"/>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSImageNameStopProgressTemplate" width="128" height="128"/>
-        <image name="NSRemoveTemplate" width="11" height="11"/>
-        <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="Off-Switch_30" width="30" height="30"/>
+        <image name="On-Switch_30" width="30" height="30"/>
+        <image name="Remove_32" width="32" height="32"/>
     </resources>
 </document>

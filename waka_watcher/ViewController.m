@@ -79,12 +79,23 @@
 }
 
 - (IBAction)watching:(id)sender {
-    if ([sender isKindOfClass:[NSButton class]] && [(NSButton *)sender state] != NSOnState) {
-        [self.outlineDatasource setWatching:YES];
-        [(NSButton *)sender setState:NSOnState];
-    }  else {
-        [self.outlineDatasource setWatching:NO];
-        [(NSButton *)sender setState:NSOffState];
+    if ([sender isKindOfClass:[NSToolbarItem class]] ) {
+        
+        if( [self.outlineDatasource watching] != NSOnState) {
+            [self.outlineDatasource setWatching:YES];
+        }  else {
+            [self.outlineDatasource setWatching:NO];
+        }
+        if ([self.outlineDatasource watching] == NSOnState) {
+            [(NSToolbarItem *)sender setImage:[NSImage imageNamed:@"Stop_32"]];
+        }
+        else if ([self.outlineDatasource watching] == NSMixedState) {
+            [(NSToolbarItem *)sender setImage:[NSImage imageNamed:@"Stopwatch_32"]];
+        }
+        else {
+            [(NSToolbarItem *)sender setImage:[NSImage imageNamed:@"Loading_32"]];
+            
+        }
     }
 }
 

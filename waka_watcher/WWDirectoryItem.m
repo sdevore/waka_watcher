@@ -15,7 +15,8 @@ NSString *const kDeleteDictionaryKey = @"delete";
 
 @interface WWDirectoryItem ()
 @property(nullable) CDEvents *changeWatcher;
-
+@property(nullable) NSNumber *fileSize;
+@property(nullable) NSNumber *totalFileSize;
 @end
 
 
@@ -43,6 +44,15 @@ NSString *const kDeleteDictionaryKey = @"delete";
                             error.localizedDescription);
                 }
                 _isDirectory = NO;
+                NSNumber *fileSize;
+                if ( [self.url getResourceValue:&fileSize forKey:NSURLFileSizeKey error:&error]) {
+                    self.fileSize = [fileSize copy];
+                }
+                NSNumber *totalFileSize;
+                if ( [self.url getResourceValue:&totalFileSize forKey:NSURLFileSizeKey error:&error]) {
+                    self.totalFileSize = [totalFileSize copy];
+                }
+                
             }
             NSDate *fileDate;
 
@@ -82,6 +92,8 @@ NSString *const kDeleteDictionaryKey = @"delete";
         copy.icon = _icon;
         copy.isDirectory = _isDirectory;
         copy.project = _project;
+        copy.fileSize = [_fileSize copy];
+        copy.totalFileSize = [_totalFileSize copy];
     }
     return copy;
 }
@@ -180,7 +192,7 @@ NSString *const kDeleteDictionaryKey = @"delete";
     NSError *error = nil;
     NSArray *properties = @[NSURLLocalizedNameKey, NSURLCreationDateKey,
             NSURLLocalizedTypeDescriptionKey, NSURLContentModificationDateKey,
-            NSURLCustomIconKey, NSURLEffectiveIconKey, NSURLIsDirectoryKey];
+            NSURLCustomIconKey, NSURLEffectiveIconKey, NSURLIsDirectoryKey, NSURLFileSizeKey,NSURLTotalFileSizeKey];
 
     NSArray *array = [[NSFileManager defaultManager]
             contentsOfDirectoryAtURL:self.url
@@ -249,11 +261,13 @@ NSString *const kDeleteDictionaryKey = @"delete";
                 [self.url getResourceValue:&fileDate
                                     forKey:NSURLContentModificationDateKey
                                      error:&error];
+       
         for (WWDirectoryItem *item in childrenArray) {
             if ([item.url isEqualTo:url]) {
                 isFound = true;
                 
                 if (!error) {
+                    DDLogVerbose(@"path: %@\rdate: %@\roldDate:%@", url.path, fileDate,item.modified);
                     if (![fileDate isEqualToDate:item.modified]) {
                         isModfied = true;
                         [item update];
@@ -350,4 +364,36 @@ NSString *const kDeleteDictionaryKey = @"delete";
     }
 }
 
+-(BOOL)isModified {
+    NSString *path;
+    NSURL *url;
+    NSDate *currentFileModified;
+    NSNumber *currentFileSize;
+    NSNumber *currentTotalFileSize;
+    NSError *error;
+    path = [self.path copy];
+    if (nil != path) {
+        url = [NSURL fileURLWithPath:path];
+        if ([url getResourceValue:&currentFileModified forKey:NSURLContentModificationDateKey error:&error]) {
+            if (nil != self.modified && ![self.modified isEqualToDate:currentFileModified]) {
+                return YES;
+            }
+        }
+        if (!self.isDirectory) {
+            if ([url getResourceValue:&currentFileSize forKey:NSURLFileSizeKey error:&error]) {
+                if (![self.fileSize isEqualToNumber:currentFileSize]) {
+                    return YES;
+                }
+            }
+            if ([url getResourceValue:&currentTotalFileSize forKey:NSURLTotalFileSizeKey error:&error]) {
+                if (![self.totalFileSize isEqualToNumber:currentTotalFileSize]) {
+                    return YES;
+                }
+            }
+            
+        }
+    }
+    
+    return NO;;
+}
 @end

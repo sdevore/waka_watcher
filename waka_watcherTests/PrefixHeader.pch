@@ -14,7 +14,7 @@
 #ifdef DEBUG
 static  DDLogLevel ddLogLevel = DDLogLevelVerbose;
 #else
-static  DDLogLevel ddLogLevel = DDLogLevelWarn;
+static  DDLogLevel ddLogLevel = DDLogLevelWarning;
 #endif
 
 #endif /* PrefixHeader_pch */

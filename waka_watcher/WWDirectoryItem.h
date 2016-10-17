@@ -40,7 +40,7 @@ extern NSString *__nonnull const kDeleteDictionaryKey;
                            inParent:(nullable WWDirectoryItem *)parent;
 - (nonnull instancetype)initWithUrl:(nonnull NSURL *)url;
 - (nullable NSString *)fileName;
-
+- (BOOL)isModified;
 /**
  *  updates many of the properties of the item
  */

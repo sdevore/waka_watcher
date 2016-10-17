@@ -43,7 +43,7 @@
     [self createFile:@"two.txt" withContent:nil insideDirectory:_testFolder];
     [self createFile:@"three.txt" withContent:nil insideDirectory:_testFolder];
     [self createFile:@"four.txt" withContent:nil insideDirectory:_testFolder];
-/*
+
     // create subfolders
     _firstSubFolder = [self createDirectory:@"First" insideDirectory:_testFolder];
     [self createFile:@"one.txt" withContent:nil insideDirectory:_firstSubFolder];
@@ -68,7 +68,7 @@
     [self createFile:@"two.txt" withContent:nil insideDirectory:_fourthSubFolder];
     [self createFile:@"three.txt" withContent:nil insideDirectory:_fourthSubFolder];
     [self createFile:@"four.txt" withContent:nil insideDirectory:_fourthSubFolder];
-*/
+
     _testItem = [[WWDirectoryItem alloc] initWithUrl:_testFolder];
 
     _added = [NSMutableArray new];

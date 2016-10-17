@@ -266,13 +266,10 @@ NSString *const kDeleteDictionaryKey = @"delete";
             if ([item.url isEqualTo:url]) {
                 isFound = true;
                 
-                if (!error) {
-                    DDLogVerbose(@"path: %@\rdate: %@\roldDate:%@", url.path, fileDate,item.modified);
-                    if (![fileDate isEqualToDate:item.modified]) {
+                if ([item isModified]) {
                         isModfied = true;
                         [item update];
                         [modified addObject:item];
-                    }
                 }
                 if (deep && item.isDirectory) {
                     if (async) {

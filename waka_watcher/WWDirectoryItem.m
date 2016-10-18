@@ -160,7 +160,7 @@ NSString *const kDeleteDictionaryKey = @"delete";
                            block:^(CDEvents *watcher, CDEvent *event) {
                                DDLogInfo(@"[Block] URLWatcher: %@\nEvent: %@", watcher, event);
                                if (nil != weakSelf) {
-                                   [weakSelf updateChildren:NO async:NO];
+                                   [weakSelf updateChildren:event.mustRescanSubDirectories async:NO];
                                }
                            }];
             DDLogInfo(@"-[CDEventsTestAppController run]:\n%@\n------\n%@", self.changeWatcher,
